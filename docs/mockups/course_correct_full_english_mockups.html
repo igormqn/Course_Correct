@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Correct – Complete Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1565C0;--blue-mid:#1976D2;--blue-light:#E3F2FD;--blue-btn:#1E88E5;
+  --dark:#0D47A1;--white:#fff;--text:#1a237e;--sub:#5c6bc0;--muted:#9e9e9e;
+  --green:#2e7d32;--orange:#f57c00;--red:#c62828;--nav:#0D47A1;
+  --border:#e0e0e0;--bg:#f8f9ff;
+}
+body{font-family:'Nunito',sans-serif;background:#e8eaf6;min-height:100vh;padding:0 0 80px}
+
+/* ── Top header ── */
+.site-header{background:var(--dark);padding:16px 40px;display:flex;align-items:center;gap:14px}
+.site-header .logo{display:flex;align-items:center;gap:10px;color:white;font-size:20px;font-weight:900}
+.site-header .logo em{font-style:normal;font-weight:400}
+.site-header .tagline{color:rgba(255,255,255,0.45);font-size:12px;margin-left:auto}
+
+/* ── App tabs ── */
+.app-tabs{background:white;display:flex;justify-content:center;box-shadow:0 2px 12px rgba(13,71,161,0.08);position:sticky;top:0;z-index:200}
+.atab{padding:16px 36px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;border:none;background:transparent;color:var(--sub);cursor:pointer;border-bottom:3px solid transparent;display:flex;align-items:center;gap:8px;transition:all .2s}
+.atab.on{color:var(--blue);border-bottom-color:var(--blue)}
+.atab:hover{color:var(--blue)}
+
+/* ── Panel ── */
+.panel{display:none;padding:28px 32px 60px;max-width:1440px;margin:0 auto}
+.panel.on{display:block}
+
+/* ── Screen sub-nav ── */
+.screen-nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+.sb{padding:8px 18px;border-radius:20px;border:1.5px solid #c5cae9;background:white;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--sub);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:6px}
+.sb.on,.sb:hover{background:var(--blue);border-color:var(--blue);color:white}
+.sb .nb{background:#ef5350;color:white;font-size:9px;font-weight:700;padding:1px 5px;border-radius:8px}
+
+/* ── Screen groups ── */
+.sg{display:none}.sg.on{display:block}
+.sg-title{text-align:center;font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:2px;margin-bottom:28px;margin-top:8px}
+.frames-row{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;align-items:flex-start}
+.frame-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.frame-label{font-size:10px;font-weight:700;color:#7986cb;text-transform:uppercase;letter-spacing:1px;text-align:center;max-width:240px;line-height:1.5}
+.us-tag{background:var(--blue-light);color:var(--blue);font-size:10px;font-weight:700;padding:3px 10px;border-radius:8px}
+
+/* ═══════════════════════════════════
+   WEB — Browser Frame
+═══════════════════════════════════ */
+.browser{width:920px;background:white;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(13,71,161,0.18);border:1.5px solid #c5cae9}
+.browser-bar{background:#f0f0f0;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd}
+.bdots{display:flex;gap:5px}.bdots span{width:10px;height:10px;border-radius:50%;display:block}
+.bdots .r{background:#ff5f57}.bdots .y{background:#febc2e}.bdots .g{background:#28c840}
+.burl{flex:1;background:white;border:1px solid #ddd;border-radius:6px;padding:4px 12px;font-size:11px;color:#888;margin:0 10px;font-family:'Nunito',sans-serif}
+.web-body{height:620px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#c5cae9 transparent}
+.web-body::-webkit-scrollbar{width:4px}.web-body::-webkit-scrollbar-thumb{background:#c5cae9;border-radius:2px}
+
+/* Web nav */
+.wnav{background:var(--blue);padding:0 32px;display:flex;align-items:center;height:54px;gap:0;flex-shrink:0}
+.wnav .wlogo{color:white;font-size:14px;font-weight:900;display:flex;align-items:center;gap:8px;margin-right:auto}
+.wnav .wlogo em{font-style:normal;font-weight:400}
+.wnav .wlinks{display:flex;gap:0}
+.wnav .wlink{color:rgba(255,255,255,0.75);font-size:12px;font-weight:700;padding:0 16px;height:54px;display:flex;align-items:center;cursor:pointer;border-bottom:3px solid transparent;transition:all .15s}
+.wnav .wlink:hover,.wnav .wlink.on{color:white;border-bottom-color:white}
+.wnav .wbtn{background:white;color:var(--blue);font-size:11px;font-weight:800;padding:7px 16px;border-radius:20px;cursor:pointer;border:none;font-family:'Nunito',sans-serif;margin-left:8px}
+.wnav .wbtn.ghost{background:rgba(255,255,255,0.15);color:white}
+.user-chip{display:flex;align-items:center;gap:8px;margin-left:8px}
+.user-chip .av{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:13px}
+.user-chip .un{color:white;font-size:12px;font-weight:700}
+
+/* Hero */
+.whero{background:linear-gradient(135deg,var(--dark) 0%,var(--blue-mid) 100%);padding:52px 40px;display:flex;align-items:center;gap:48px}
+.whero .ht h1{color:white;font-size:30px;font-weight:900;line-height:1.2;margin-bottom:10px;font-family:'DM Serif Display',serif}
+.whero .ht h1 span{color:#90CAF9}
+.whero .ht p{color:rgba(255,255,255,0.75);font-size:13px;line-height:1.7;margin-bottom:22px;max-width:420px}
+.whero .hbtns{display:flex;gap:10px}
+.whero .hbtn{padding:11px 22px;border-radius:24px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;border:none}
+.hbtn.p{background:white;color:var(--blue)}.hbtn.s{background:rgba(255,255,255,0.15);color:white}
+.hvisual{flex-shrink:0;background:rgba(255,255,255,0.1);border-radius:18px;padding:24px 28px;text-align:center}
+.hvisual .hvi{font-size:64px}.hvisual p{color:rgba(255,255,255,0.65);font-size:11px;margin-top:6px}
+
+/* Stats bar */
+.wstats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border)}
+.wstat{padding:20px;text-align:center;border-right:1px solid var(--border)}
+.wstat:last-child{border-right:none}
+.wstat .sn{font-size:24px;font-weight:900;color:var(--blue)}
+.wstat .sl{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* Sections */
+.wsec{padding:28px 32px}
+.wsec .wsh{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.wsec .wst{font-size:16px;font-weight:900;color:var(--text)}
+.wsec .wsa{font-size:12px;font-weight:700;color:var(--blue);cursor:pointer}
+
+/* Course grid */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ccard-web{background:white;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .18s}
+.ccard-web:hover{border-color:var(--blue);box-shadow:0 4px 20px rgba(21,101,192,0.15);transform:translateY(-2px)}
+.ccard-web .cb{height:64px;display:flex;align-items:center;justify-content:center;font-size:30px}
+.ccard-web .cd{padding:12px}
+.ccard-web .cs{font-size:10px;font-weight:700;color:var(--sub);text-transform:uppercase;margin-bottom:4px}
+.ccard-web .cn{font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:8px}
+.ccard-web .cf{display:flex;justify-content:space-between;align-items:center}
+.spl{font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px}
+.spl.active{background:#e8f5e9;color:var(--green)}
+.spl.upcoming{background:#fff8e1;color:var(--orange)}
+.spl.past{background:#f5f5f5;color:var(--muted)}
+.cd-date{font-size:10px;color:var(--muted)}
+
+/* Table */
+.wtable{width:100%;border-collapse:collapse;font-size:12px}
+.wtable th{background:#f8f9ff;color:var(--sub);font-size:11px;font-weight:700;padding:10px 14px;text-align:left;border-bottom:2px solid var(--border)}
+.wtable td{padding:12px 14px;border-bottom:1px solid #f0f0f0;color:var(--text);vertical-align:middle}
+.wtable tr:hover td{background:#f8f9ff}
+.tstatus{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px}
+.tstatus.graded{background:#e8f5e9;color:var(--green)}
+.tstatus.inprog{background:#fff3e0;color:var(--orange)}
+.tstatus.submitted{background:#e3f2fd;color:var(--blue)}
+.tbtn{padding:5px 12px;border:1.5px solid var(--border);border-radius:8px;background:white;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:var(--text);cursor:pointer;transition:all .15s}
+.tbtn:hover{border-color:var(--blue);color:var(--blue)}
+.tbtn.primary{background:var(--blue);color:white;border-color:var(--blue)}
+
+/* Dashboard hero */
+.dash-hero{background:var(--blue);padding:22px 32px;display:flex;align-items:center;gap:18px}
+.dash-hero .dhav{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:26px}
+.dash-hero .dhi{flex:1}
+.dash-hero .dhi h2{color:white;font-size:17px;font-weight:900;margin-bottom:2px}
+.dash-hero .dhi p{color:rgba(255,255,255,0.7);font-size:12px}
+.dash-hero .dhkpis{display:flex;gap:10px}
+.dhkpi{background:rgba(255,255,255,0.15);border-radius:10px;padding:10px 14px;text-align:center}
+.dhkpi .dk{color:white;font-size:18px;font-weight:900}
+.dhkpi .dl{color:rgba(255,255,255,0.7);font-size:10px;margin-top:1px}
+
+/* Admin layout */
+.admin-wrap{display:grid;grid-template-columns:210px 1fr;height:620px}
+.asidebar{background:var(--dark);display:flex;flex-direction:column}
+.asidebar .aslogo{padding:18px 18px 16px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.asidebar .aslogo p{color:white;font-size:13px;font-weight:900}
+.asidebar .aslogo small{color:rgba(255,255,255,0.45);font-size:10px}
+.amenu{padding:14px 0}
+.ami{padding:10px 18px;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.65);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;border-left:3px solid transparent}
+.ami:hover,.ami.on{background:rgba(255,255,255,0.1);color:white;border-left-color:#64b5f6}
+.ami .ai{font-size:14px}
+.amain{background:var(--bg);overflow-y:auto}
+.amain::-webkit-scrollbar{width:4px}.amain::-webkit-scrollbar-thumb{background:#c5cae9;border-radius:2px}
+.atopbar{background:white;padding:14px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0}
+.atopbar h2{font-size:15px;font-weight:900;color:var(--text)}
+.akpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:16px 20px 0}
+.akpi{background:white;border-radius:10px;padding:14px;border:1.5px solid var(--border)}
+.akpi .an{font-size:22px;font-weight:900;color:var(--blue)}
+.akpi .al{font-size:11px;color:var(--muted);margin-top:2px}
+.akpi .at{font-size:10px;font-weight:700;margin-top:4px}
+.at.up{color:var(--green)}.at.warn{color:var(--orange)}
+.acontent{padding:16px 20px}
+
+/* ═══════════════════════════════════
+   DESKTOP — Window Frame
+═══════════════════════════════════ */
+.winframe{width:980px;background:white;border-radius:10px;overflow:hidden;box-shadow:0 8px 40px rgba(13,71,161,0.18)}
+.titlebar{background:#263238;height:34px;display:flex;align-items:center;padding:0 14px;gap:8px}
+.tbdots{display:flex;gap:5px}.tbdots span{width:10px;height:10px;border-radius:50%}
+.tbdots .r{background:#ff5f57}.tbdots .y{background:#febc2e}.tbdots .g{background:#28c840}
+.tbtitle{margin:0 auto;color:rgba(255,255,255,0.55);font-size:11px}
+.win-body{display:grid;grid-template-columns:220px 1fr;height:580px}
+
+/* Desktop sidebar */
+.dtsidebar{background:#1a237e;display:flex;flex-direction:column}
+.dtsidebar .dtsh{padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.dtsidebar .dtsh .tav{width:46px;height:46px;border-radius:50%;background:var(--blue-btn);display:flex;align-items:center;justify-content:center;font-size:20px;color:white;margin-bottom:10px}
+.dtsidebar .dtsh .tn{color:white;font-size:13px;font-weight:800}
+.dtsidebar .dtsh .tr{color:rgba(255,255,255,0.5);font-size:10px;margin-top:2px}
+.dtnav{padding:12px 0}
+.dtnav .dtns{padding:6px 16px;font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px}
+.dtni{padding:10px 16px;display:flex;align-items:center;gap:10px;color:rgba(255,255,255,0.65);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;border-left:3px solid transparent}
+.dtni:hover,.dtni.on{background:rgba(255,255,255,0.1);color:white;border-left-color:#64b5f6}
+.dtni .dtic{font-size:14px}
+.dtni .dtnb{margin-left:auto;background:#ef5350;color:white;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px}
+
+/* Desktop main */
+.dtmain{background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+.dttoolbar{background:white;padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.dttoolbar h2{font-size:14px;font-weight:900;color:var(--text)}
+.dtsearch{flex:1;max-width:220px;background:#f5f5f5;border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-family:'Nunito',sans-serif;font-size:12px;color:var(--text);outline:none}
+.dtfilter{padding:7px 14px;background:white;border:1.5px solid var(--border);border-radius:8px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:var(--sub);cursor:pointer}
+.dtfilter.on{background:var(--blue);border-color:var(--blue);color:white}
+.dtcontent{flex:1;overflow-y:auto;padding:16px 20px}
+.dtcontent::-webkit-scrollbar{width:4px}.dtcontent::-webkit-scrollbar-thumb{background:#c5cae9;border-radius:2px}
+
+/* Desktop assignment cards */
+.dtlist{display:flex;flex-direction:column;gap:10px}
+.dtcard{background:white;border-radius:10px;border:1.5px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .15s}
+.dtcard:hover{border-color:var(--blue);box-shadow:0 2px 12px rgba(21,101,192,0.12)}
+.dtcard.urgent{border-left:4px solid #ef5350}
+.dtcard .dtic{width:44px;height:44px;border-radius:10px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.dtcard .dti{flex:1;min-width:0}
+.dtcard .dtn{font-size:12px;font-weight:800;color:var(--text);margin-bottom:3px}
+.dtcard .dts{font-size:11px;color:var(--muted);margin-bottom:4px}
+.dtcard .dtm{display:flex;gap:8px;align-items:center}
+.dtag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px}
+.dtag.mat{background:#e3f2fd;color:var(--blue)}
+.dtag.type{background:#fff8e1;color:var(--orange)}
+.dtag.urg{background:#ffebee;color:#c62828}
+.dtcard .dtd{margin-left:auto;font-size:11px;color:var(--muted);text-align:right;flex-shrink:0}
+.dtcard .dtd .ddl{font-weight:700;color:#ef5350;font-size:10px;margin-top:2px}
+
+/* Correction split */
+.split{display:grid;grid-template-columns:1fr 1fr;height:548px}
+.docpanel{border-right:1px solid var(--border);overflow-y:auto;padding:20px}
+.docpanel::-webkit-scrollbar{width:4px}.docpanel::-webkit-scrollbar-thumb{background:#c5cae9;border-radius:2px}
+.dochead{background:var(--blue);color:white;border-radius:10px;padding:14px;margin-bottom:14px}
+.dochead h3{font-size:13px;font-weight:800;margin-bottom:4px}
+.dochead .dm{font-size:11px;opacity:.8}
+.docprev{background:#fafafa;border:1px solid var(--border);border-radius:8px;padding:16px;font-size:11px;color:#444;line-height:1.8}
+.docprev h4{font-size:12px;font-weight:800;color:var(--text);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.docprev .hl{background:#fff9c4;padding:1px 3px;border-radius:2px}
+.corrpanel{overflow-y:auto;padding:20px;background:var(--bg);display:flex;flex-direction:column;gap:12px}
+.corrpanel::-webkit-scrollbar{width:4px}.corrpanel::-webkit-scrollbar-thumb{background:#c5cae9;border-radius:2px}
+.csection{background:white;border-radius:10px;border:1.5px solid var(--border);overflow:hidden}
+.csection .csh{background:var(--bg);padding:10px 14px;border-bottom:1px solid var(--border);font-size:12px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:6px}
+.csection .csb{padding:12px 14px}
+.note-row{display:flex;gap:8px;align-items:center}
+.note-inp{width:72px;border:2px solid var(--blue);border-radius:8px;padding:8px 10px;font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:var(--blue);text-align:center;outline:none}
+.note-max{font-size:13px;color:var(--muted);font-weight:700}
+.note-grade{font-size:12px;font-weight:700;padding:4px 12px;border-radius:10px;background:#e8f5e9;color:var(--green)}
+.txtarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px;font-family:'Nunito',sans-serif;font-size:12px;color:var(--text);resize:none;outline:none;height:88px;line-height:1.6}
+.txtarea:focus{border-color:var(--blue)}
+.qchips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.qc{background:var(--blue-light);color:var(--blue);font-size:10px;font-weight:700;padding:4px 10px;border-radius:10px;cursor:pointer;transition:all .15s}
+.qc:hover{background:var(--blue);color:white}
+.close-btn{background:var(--green);color:white;border:none;border-radius:10px;padding:12px;width:100%;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.save-btn{background:white;color:var(--text);border:1.5px solid var(--border);border-radius:10px;padding:10px;width:100%;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer}
+
+/* ═══════════════════════════════════
+   MOBILE — Phone Frame
+═══════════════════════════════════ */
+.phone{width:262px;background:#111;border-radius:40px;padding:13px 9px;box-shadow:0 20px 60px rgba(13,71,161,0.22),0 4px 16px rgba(0,0,0,0.4);position:relative}
+.phone::before{content:'';position:absolute;top:13px;left:50%;transform:translateX(-50%);width:70px;height:4px;background:#333;border-radius:2px}
+.phone-inner{background:var(--blue-light);border-radius:28px;overflow:hidden;height:524px;display:flex;flex-direction:column;position:relative}
+
+/* Phone components */
+.mbar{background:var(--blue);padding:7px 14px 5px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.mbar .mt{color:white;font-size:10px;font-weight:700}
+.mbar .mi{color:white;font-size:9px}
+.mtopbar{background:var(--blue);padding:7px 14px 9px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.mtopbar .mlogo{width:24px;height:24px;background:white;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.mtopbar .mtitle{color:white;font-size:12px;font-weight:800;flex:1}
+.mtopbar .mback{color:white;font-size:16px;cursor:pointer;line-height:1}
+.mtopbar .micon{color:white;font-size:15px}
+.mscroll{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.mscroll::-webkit-scrollbar{display:none}
+.mbotnav{background:var(--nav);padding:8px 16px 7px;display:flex;justify-content:space-around;align-items:center;flex-shrink:0}
+.mbni{display:flex;flex-direction:column;align-items:center;gap:1px;color:rgba(255,255,255,0.45);font-size:16px;cursor:pointer}
+.mbni.on{color:white}
+.mbni span{font-size:8px;font-weight:600}
+
+/* Splash */
+.msplash{background:var(--blue);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 22px}
+.msplash .wt{color:rgba(255,255,255,0.85);font-size:13px;font-weight:600;font-style:italic;margin-bottom:18px}
+.msplash .lbox{width:158px;height:114px;background:var(--blue-btn);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;margin-bottom:24px;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.msplash .lbox .bi{font-size:46px}
+.msplash .lbox .ln{color:white;font-size:13px;font-weight:900}
+.msplash .lbox .ln em{font-style:normal;font-weight:400}
+.mbtn{width:100%;background:white;color:var(--blue);border:none;border-radius:28px;padding:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;margin-bottom:10px}
+.mbtn.ghost{background:transparent;border:2px solid rgba(255,255,255,0.45);color:white}
+.msplash .mtag{color:rgba(255,255,255,0.4);font-size:10px;margin-top:14px;text-align:center}
+
+/* Login */
+.mlogin-top{background:var(--blue);padding:22px 20px 26px;text-align:center;flex-shrink:0}
+.mlogin-top .lico{font-size:34px;margin-bottom:8px}
+.mlogin-top h2{color:white;font-size:15px;font-weight:900;margin-bottom:3px}
+.mlogin-top p{color:rgba(255,255,255,0.7);font-size:11px}
+.mform{padding:20px 18px;display:flex;flex-direction:column;gap:11px;background:white;flex:1;overflow-y:auto;scrollbar-width:none}
+.mform::-webkit-scrollbar{display:none}
+.mlabel{font-size:10px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;display:block}
+.minp{border:1.5px solid var(--border);border-radius:10px;padding:9px 12px;font-family:'Nunito',sans-serif;font-size:12px;color:var(--text);outline:none;background:#fafafa;width:100%}
+.minp:focus{border-color:var(--blue);background:var(--blue-light)}
+.minp-wrap{position:relative}
+.minp-wrap .eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;cursor:pointer}
+.mforgot{font-size:11px;font-weight:700;color:var(--blue);text-align:right;cursor:pointer;margin-top:-5px}
+.mlogin-btn{background:var(--blue);color:white;border:none;border-radius:28px;padding:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+.mdivider{display:flex;align-items:center;gap:10px;margin:2px 0}
+.mdivider::before,.mdivider::after{content:'';flex:1;height:1px;background:var(--border)}
+.mdivider span{font-size:10px;color:var(--muted);font-weight:600}
+.msso-btn{background:white;border:1.5px solid var(--border);border-radius:10px;padding:9px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.mreg-link{text-align:center;font-size:11px;color:var(--muted)}
+.mreg-link a{color:var(--blue);font-weight:700;text-decoration:none}
+
+/* Register */
+.mreg-header{background:var(--blue);padding:16px 20px 20px;flex-shrink:0}
+.mreg-header .rback{color:rgba(255,255,255,0.7);font-size:12px;cursor:pointer;margin-bottom:7px;display:block}
+.mreg-header h2{color:white;font-size:14px;font-weight:900;margin-bottom:3px}
+.mreg-header p{color:rgba(255,255,255,0.7);font-size:11px}
+.msteps{display:flex;gap:5px;padding:10px 18px 0}
+.mstep{flex:1;height:4px;border-radius:2px;background:var(--border)}
+.mstep.done{background:var(--blue)}.mstep.cur{background:var(--blue-btn)}
+.name-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.email-note{font-size:10px;color:var(--sub);margin-top:2px;padding:0 2px}
+.terms-txt{font-size:10px;color:var(--muted);text-align:center;line-height:1.5}
+.terms-txt a{color:var(--blue);font-weight:700}
+
+/* Forgot */
+.mforgot-top{background:var(--blue);padding:20px 20px 24px;text-align:center;flex-shrink:0}
+.mforgot-top .fico{font-size:34px;margin-bottom:7px}
+.mforgot-top h2{color:white;font-size:14px;font-weight:900;margin-bottom:3px}
+.mforgot-top p{color:rgba(255,255,255,0.7);font-size:11px;line-height:1.5}
+.info-card{background:#e3f2fd;border-radius:10px;padding:11px;display:flex;gap:8px;align-items:flex-start}
+.info-card .ic{font-size:13px;flex-shrink:0;margin-top:1px}
+.info-card p{font-size:11px;color:var(--blue);line-height:1.5;font-weight:600}
+.success-card{background:#e8f5e9;border-radius:10px;padding:12px;text-align:center}
+.success-card .sic{font-size:22px;margin-bottom:4px}
+.success-card .st{font-size:11px;font-weight:700;color:var(--green)}
+.success-card .ss{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* Subjects */
+.msubj-header{background:var(--blue);padding:8px 14px 12px;flex-shrink:0}
+.msubj-header h2{color:white;font-size:13px;font-weight:800;text-align:center}
+.msubj-grid{padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.msubj{background:white;border-radius:13px;padding:14px 10px 11px;display:flex;flex-direction:column;align-items:center;gap:7px;box-shadow:0 2px 10px rgba(13,71,161,0.08);cursor:pointer;border:1.5px solid rgba(21,101,192,0.07);transition:all .15s}
+.msubj:hover,.msubj.sel{border-color:var(--blue);box-shadow:0 4px 18px rgba(21,101,192,0.18)}
+.msubj .si{width:46px;height:46px;background:var(--blue-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.msubj .sn{font-size:11px;font-weight:800;color:var(--text);text-align:center}
+
+/* Course list mobile */
+.mclist{padding:10px 12px;display:flex;flex-direction:column;gap:8px}
+.mccard{background:white;border-radius:12px;padding:10px;display:flex;gap:10px;align-items:center;box-shadow:0 2px 8px rgba(13,71,161,0.07);cursor:pointer;border:1.5px solid rgba(21,101,192,0.07)}
+.mccard .ccic{width:44px;height:44px;flex-shrink:0;background:var(--blue-btn);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white}
+.mccard .cci{flex:1;min-width:0}
+.mccard .ccn{font-size:11px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:4px}
+.mccard .ccm{display:flex;gap:8px}
+.mccard .cm{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--muted)}
+.mccard .cm .dot{width:5px;height:5px;border-radius:50%}
+.dot-r{background:#e57373}.dot-b{background:#64b5f6}
+
+/* Deposit */
+.mdep{padding:12px;display:flex;flex-direction:column;gap:10px}
+.mdep-hero{background:var(--blue);border-radius:12px;padding:12px;color:white}
+.mdep-hero .dhtag{background:rgba(255,255,255,0.2);font-size:9px;font-weight:700;padding:2px 7px;border-radius:7px;display:inline-block;margin-bottom:5px}
+.mdep-hero h3{font-size:12px;font-weight:800;line-height:1.3;margin-bottom:5px}
+.mdep-hero .dhbdgs{display:flex;gap:5px;flex-wrap:wrap}
+.mdep-hero .dhb{background:rgba(255,255,255,0.15);color:white;font-size:9px;font-weight:600;padding:2px 7px;border-radius:7px}
+.upload-area{border:2px dashed var(--blue);border-radius:12px;padding:18px;text-align:center;background:white;cursor:pointer}
+.upload-area .uic{font-size:24px;margin-bottom:6px}
+.upload-area .ut{font-size:11px;font-weight:800;color:var(--text)}
+.upload-area .us{font-size:9px;color:var(--muted);margin-top:2px}
+.svcbox{background:white;border-radius:12px;padding:11px;box-shadow:0 2px 8px rgba(13,71,161,0.06)}
+.svcbox .svct{font-size:11px;font-weight:800;color:var(--text);margin-bottom:7px}
+.svcopt{display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:9px;cursor:pointer;border:1.5px solid transparent;margin-bottom:5px;transition:all .15s}
+.svcopt.sel{border-color:var(--blue);background:var(--blue-light)}
+.svcopt .on{font-size:11px;font-weight:700;color:var(--text)}
+.svcopt .od{font-size:9px;color:var(--muted)}
+.svcopt .op{font-size:12px;font-weight:900;color:var(--blue)}
+.msubmit{background:var(--blue);color:white;border:none;border-radius:12px;padding:12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;width:100%}
+
+/* Multi-deposit */
+.multi-item{background:white;border-radius:10px;padding:10px;display:flex;align-items:center;gap:9px;border:1.5px solid var(--blue);box-shadow:0 2px 8px rgba(13,71,161,0.09)}
+.multi-item .mic{font-size:18px}
+.multi-item .mii{flex:1}
+.multi-item .min{font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px}
+.multi-item .mis{font-size:10px;color:var(--sub);font-weight:600}
+.multi-item .miv{color:var(--blue);font-weight:800;font-size:15px}
+.add-more{background:white;border-radius:10px;border:2px dashed var(--border);padding:12px;text-align:center;cursor:pointer}
+.add-more .amic{font-size:20px;margin-bottom:4px}
+.add-more .amt{font-size:11px;font-weight:700;color:var(--sub)}
+
+/* Recap */
+.recap{padding:12px;display:flex;flex-direction:column;gap:9px}
+.recap-item{background:white;border-radius:10px;padding:10px;display:flex;align-items:center;gap:10px;border-left:4px solid var(--blue);box-shadow:0 1px 6px rgba(13,71,161,0.07)}
+.recap-item .ric{font-size:18px}
+.recap-item .rii{flex:1}
+.recap-item .rin{font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px}
+.recap-item .ris{font-size:10px;color:var(--sub);font-weight:600}
+.recap-item .rip{font-size:13px;font-weight:900;color:var(--blue)}
+.recap-total{background:var(--blue);border-radius:12px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.recap-total .rtl{color:rgba(255,255,255,0.8);font-size:12px;font-weight:700}
+.recap-total .rtp{color:white;font-size:18px;font-weight:900}
+.pay-row{background:white;border-radius:11px;padding:10px;border:1.5px solid var(--border)}
+.pay-row .prt{font-size:11px;font-weight:700;color:var(--text);margin-bottom:7px}
+.pay-card{background:#f5f5f5;border-radius:8px;padding:9px;display:flex;align-items:center;gap:8px}
+.pay-card .pct{font-size:11px;font-weight:700;color:var(--text)}
+.pay-card .pcs{font-size:10px;color:var(--muted)}
+.confirm-btn{background:var(--green);color:white;border:none;border-radius:12px;padding:12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;width:100%}
+.secure-note{font-size:10px;color:var(--muted);text-align:center}
+
+/* Dashboard mobile */
+.mdash-header{background:var(--blue);padding:11px 14px 13px;flex-shrink:0}
+.mdash-header .mdu{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.mdash-header .mdav{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:14px}
+.mdash-header .mdn{color:white;font-size:12px;font-weight:800}
+.mdash-header .mds{color:rgba(255,255,255,0.6);font-size:10px}
+.mdash-header .mnotif{margin-left:auto;position:relative}
+.mnotif-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;background:#ef5350;border-radius:50%;border:1.5px solid var(--blue)}
+.mkpis{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.mkpi{background:rgba(255,255,255,0.15);border-radius:8px;padding:7px;text-align:center}
+.mkpi .mkn{color:white;font-size:15px;font-weight:900}
+.mkpi .mkl{color:rgba(255,255,255,0.7);font-size:9px;margin-top:1px}
+.mtabs{display:flex;padding:7px 10px 0;gap:5px;background:white;flex-shrink:0}
+.mtab{flex:1;padding:6px;text-align:center;font-size:10px;font-weight:700;border-radius:8px;cursor:pointer;background:transparent;border:none;color:var(--sub);font-family:'Nunito',sans-serif}
+.mtab.on{background:var(--blue-light);color:var(--blue)}
+.mdvlist{padding:9px 11px;display:flex;flex-direction:column;gap:7px}
+.mdvcard{background:white;border-radius:10px;padding:10px;border-left:4px solid var(--blue);box-shadow:0 1px 6px rgba(13,71,161,0.07);cursor:pointer}
+.mdvcard.g{border-left-color:var(--green)}.mdvcard.o{border-left-color:var(--orange)}
+.mdvcard .dvt{font-size:11px;font-weight:800;color:var(--text);margin-bottom:2px}
+.mdvcard .dvs{font-size:10px;color:var(--muted);margin-bottom:5px}
+.mdvcard .dvr{display:flex;justify-content:space-between;align-items:center}
+.mpill{font-size:10px;font-weight:700;padding:3px 8px;border-radius:8px}
+.pill-g{background:#e8f5e9;color:var(--green)}
+.pill-o{background:#fff3e0;color:var(--orange)}
+.pill-b{background:#e3f2fd;color:var(--blue)}
+.pill-p{background:#f3e5f5;color:#6a1b9a}
+
+/* Profile mobile */
+.mprofile-top{background:var(--blue);padding:20px 14px;text-align:center;flex-shrink:0}
+.mprofile-top .pav{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 8px}
+.mprofile-top .pn{color:white;font-size:14px;font-weight:900}
+.mprofile-top .pe{color:rgba(255,255,255,0.7);font-size:11px;margin-top:2px}
+.mlist-card{background:white;border-radius:11px;overflow:hidden;border:1.5px solid var(--border)}
+.mlist-row{padding:10px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.mlist-row:last-child{border-bottom:none}
+.mlist-row .mlic{font-size:13px}
+.mlist-row .mlt{font-size:11px;font-weight:700;color:var(--text);flex:1}
+.mlist-row .mlv{font-size:11px;font-weight:600;color:var(--muted)}
+.mlist-row .mla{font-size:11px;color:var(--muted)}
+.logout-btn{background:white;color:var(--red);border:1.5px solid #ffcdd2;border-radius:11px;padding:12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;width:100%}
+
+/* Correction detail mobile */
+.mcorr-hero{background:var(--blue);margin:10px;border-radius:12px;padding:12px;color:white}
+.mcorr-hero .chtag{background:rgba(255,255,255,0.2);font-size:9px;font-weight:700;padding:2px 7px;border-radius:7px;display:inline-block;margin-bottom:5px}
+.mcorr-hero h3{font-size:12px;font-weight:800;line-height:1.3;margin-bottom:8px}
+.mcorr-hero .chsr{display:flex;align-items:center;gap:10px}
+.mcorr-hero .chs{font-size:26px;font-weight:900}
+.mcorr-hero .chi{font-size:10px;opacity:.8;line-height:1.5}
+.mcorr-hero .chgr{background:rgba(255,255,255,0.2);padding:4px 10px;border-radius:8px;font-size:11px;font-weight:800;margin-top:8px;display:inline-block}
+.mcsect{padding:0 10px 8px}
+.mcsect-t{font-size:10px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
+.mcomment{background:white;border-radius:10px;padding:10px;font-size:11px;color:var(--text);line-height:1.6;border:1.5px solid var(--border)}
+.mcomment .mca{font-size:10px;font-weight:700;color:var(--sub);margin-bottom:4px}
+.mpts{display:flex;flex-direction:column;gap:5px}
+.mpt{background:white;border-radius:8px;padding:8px 10px;display:flex;align-items:flex-start;gap:7px;font-size:11px;color:var(--text)}
+.mpt .mpd{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.mpd-g{background:var(--green)}.mpd-r{background:var(--red)}
+.realtime-badge{background:#e8f5e9;border-radius:10px;padding:9px 11px;display:flex;align-items:center;gap:7px;margin:0 10px 8px}
+.rt-dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.5s infinite;flex-shrink:0}
+.rt-text{font-size:11px;font-weight:700;color:var(--green)}
+.mdl-btn{background:var(--blue);color:white;border:none;border-radius:10px;padding:10px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;margin:0 10px;width:calc(100% - 20px)}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="logo">📖 <em>Course</em>Correct</div>
+  <div class="tagline">NYU · Full Platform Mockups — Web · Desktop · Mobile</div>
+</div>
+
+<!-- App tabs -->
+<div class="app-tabs">
+  <button class="atab on" onclick="switchApp('web',this)">🌐 Web Application</button>
+  <button class="atab" onclick="switchApp('desktop',this)">🖥️ Desktop Application</button>
+  <button class="atab" onclick="switchApp('mobile',this)">📱 Mobile Application</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     WEB APPLICATION
+══════════════════════════════════════════════ -->
+<div class="panel on" id="p-web">
+  <div class="screen-nav">
+    <button class="sb on" onclick="wscreen('home',this)">🏠 Home</button>
+    <button class="sb" onclick="wscreen('courses',this)">📚 All Courses</button>
+    <button class="sb" onclick="wscreen('course-detail',this)">🔍 Course Detail</button>
+    <button class="sb" onclick="wscreen('dashboard',this)">👤 Student Space</button>
+    <button class="sb" onclick="wscreen('deposit',this)">📤 Submit Assignment</button>
+    <button class="sb" onclick="wscreen('admin',this)">⚙️ Admin Space</button>
+  </div>
+
+  <!-- Home -->
+  <div class="sg on" id="w-home">
+    <div class="sg-title">Home Page — US1</div>
+    <div class="frames-row"><div class="frame-wrap">
+      <div class="frame-label">Landing page · Public access</div>
+      <div class="us-tag">US1</div>
+      <div class="browser"><div class="browser-bar"><div class="bdots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="burl">coursecorrect.nyu.edu</div></div>
+        <div class="web-body">
+          <div class="wnav"><div class="wlogo">📖 <em>Course</em><b>Correct</b></div><div class="wlinks"><span class="wlink on">Home</span><span class="wlink">Courses</span><span class="wlink">Services</span><span class="wlink">About</span></div><button class="wbtn ghost">Sign In</button><button class="wbtn">Sign Up</button></div>
+          <div class="whero"><div class="ht"><h1>Your assignments<br><span>corrected online.</span></h1><p>NYU's academic platform for remote tutoring and online assignment correction. Submit your work, choose your service, get expert feedback.</p><div class="hbtns"><button class="hbtn p">Submit an Assignment</button><button class="hbtn s">Browse Courses</button></div></div><div class="hvisual"><div class="hvi">📖</div><p>CourseCorrect by NYU</p></div></div>
+          <div class="wstats"><div class="wstat"><div class="sn">1,240</div><div class="sl">Active Students</div></div><div class="wstat"><div class="sn">86</div><div class="sl">Certified Tutors</div></div><div class="wstat"><div class="sn">4,500+</div><div class="sl">Assignments Graded</div></div><div class="wstat"><div class="sn">12</div><div class="sl">Subjects Available</div></div></div>
+          <div class="wsec"><div class="wsh"><div class="wst">Available Courses</div><div class="wsa">View all →</div></div><div class="cgrid"><div class="ccard-web"><div class="cb" style="background:#e3f2fd">🧪</div><div class="cd"><div class="cs">Chemistry</div><div class="cn">CHEM 421: Forensic Chemistry</div><div class="cf"><span class="spl active">● Active</span><span class="cd-date">Jan–May 2025</span></div></div></div><div class="ccard-web"><div class="cb" style="background:#e8f5e9">📚</div><div class="cd"><div class="cs">English Lit.</div><div class="cn">ENG 301: American Literature</div><div class="cf"><span class="spl active">● Active</span><span class="cd-date">Jan–May 2025</span></div></div></div><div class="ccard-web"><div class="cb" style="background:#fff8e1">🏛️</div><div class="cd"><div class="cs">Economics</div><div class="cn">ECON 201: Microeconomics</div><div class="cf"><span class="spl upcoming">◎ Upcoming</span><span class="cd-date">Sep–Dec 2025</span></div></div></div></div></div>
+          <div class="wsec" style="background:#f8f9ff;border-top:1px solid var(--border)"><div class="wsh"><div class="wst">Our Services</div></div><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px"><div style="background:white;border-radius:12px;padding:20px;border:1.5px solid var(--border);text-align:center"><div style="font-size:32px;margin-bottom:8px">⭐</div><div style="font-size:14px;font-weight:900;color:var(--text);margin-bottom:4px">Premium</div><div style="font-size:22px;font-weight:900;color:var(--blue);margin-bottom:6px">$250</div><div style="font-size:11px;color:var(--muted)">24h turnaround · Detailed comments · Priority tutor</div></div><div style="background:white;border-radius:12px;padding:20px;border:1.5px solid var(--border);text-align:center"><div style="font-size:32px;margin-bottom:8px">📝</div><div style="font-size:14px;font-weight:900;color:var(--text);margin-bottom:4px">Standard</div><div style="font-size:22px;font-weight:900;color:var(--blue);margin-bottom:6px">$50</div><div style="font-size:11px;color:var(--muted)">72h turnaround · Grade + comments</div></div></div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- All Courses -->
+  <div class="sg" id="w-courses">
+    <div class="sg-title">All Courses — US2</div>
+    <div class="frames-row"><div class="frame-wrap">
+      <div class="frame-label">Browse all courses with filters</div><div class="us-tag">US2</div>
+      <div class="browser"><div class="browser-bar"><div class="bdots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="burl">coursecorrect.nyu.edu/courses</div></div>
+        <div class="web-body">
+          <div class="wnav"><div class="wlogo">📖 <em>Course</em><b>Correct</b></div><div class="wlinks"><span class="wlink">Home</span><span class="wlink on">Courses</span><span class="wlink">Services</span></div><button class="wbtn">My Space</button></div>
+          <div class="wsec"><div class="wsh"><div class="wst">All Courses</div><div style="display:flex;gap:8px"><select style="border:1.5px solid var(--border);border-radius:8px;padding:5px 10px;font-family:'Nunito',sans-serif;font-size:12px;outline:none"><option>All Subjects</option><option>Chemistry</option><option>Economics</option></select><select style="border:1.5px solid var(--border);border-radius:8px;padding:5px 10px;font-family:'Nunito',sans-serif;font-size:12px;outline:none"><option>All Status</option><option>Active</option><option>Upcoming</option><option>Past</option></select></div></div>
+          <table class="wtable"><thead><tr><th>Course</th><th>Subject</th><th>Tutor</th><th>Dates</th><th>Status</th><th></th></tr></thead><tbody>
+            <tr><td>🧪 CHEM 421: Forensic Chemistry</td><td>Chemistry</td><td>Prof. Williams</td><td>Jan–May 2025</td><td><span class="tstatus graded">● Active</span></td><td><button class="tbtn">View →</button></td></tr>
+            <tr><td>📚 ENG 301: American Literature</td><td>English Lit.</td><td>Dr. Morrison</td><td>Jan–May 2025</td><td><span class="tstatus graded">● Active</span></td><td><button class="tbtn">View →</button></td></tr>
+            <tr><td>🏛️ ECON 201: Microeconomics</td><td>Economics</td><td>Prof. Greene</td><td>Sep–Dec 2025</td><td><span class="tstatus inprog">◎ Upcoming</span></td><td><button class="tbtn">View →</button></td></tr>
+            <tr><td>✈️ MATH 301: Linear Algebra</td><td>Mathematics</td><td>Dr. Chen</td><td>Sep–Dec 2024</td><td><span class="tstatus" style="background:#f5f5f5;color:#9e9e9e">● Past</span></td><td><button class="tbtn">View →</button></td></tr>
+            <tr><td>🌍 HIST 201: World History</td><td>History</td><td>Prof. Davis</td><td>Jan–May 2025</td><td><span class="tstatus graded">● Active</span></td><td><button class="tbtn">View →</button></td></tr>
+            <tr><td>🔢 PHYS 101: Classical Physics</td><td>Physics</td><td>Dr. Kim</td><td>Jan–May 2025</td><td><span class="tstatus graded">● Active</span></td><td><button class="tbtn">View →</button></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Course Detail -->
+  <div class="sg" id="w-course-detail">
+    <div class="sg-title">Course Detail — US3</div>
+    <div class="frames-row"><div class="frame-wrap">
+      <div class="frame-label">Course info + tutor + submit access</div><div class="us-tag">US3</div>
+      <div class="browser"><div class="browser-bar"><div class="bdots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="burl">coursecorrect.nyu.edu/courses/chem-421</div></div>
+        <div class="web-body">
+          <div class="wnav"><div class="wlogo">📖 <em>Course</em><b>Correct</b></div><div class="wlinks"><span class="wlink">Home</span><span class="wlink on">Courses</span></div><button class="wbtn">My Space</button></div>
+          <div style="background:linear-gradient(135deg,var(--dark),var(--blue-mid));padding:36px 40px;display:flex;gap:32px;align-items:flex-start">
+            <div style="flex:1"><div style="background:rgba(255,255,255,0.2);color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:10px;display:inline-block;margin-bottom:10px">● ACTIVE</div><h2 style="color:white;font-size:22px;font-weight:900;margin-bottom:6px;font-family:'DM Serif Display',serif">CHEM 421: Forensic Chemistry</h2><p style="color:rgba(255,255,255,0.75);font-size:13px;line-height:1.6;margin-bottom:16px">January 2025 – May 2025 · Chemistry Department</p><div style="display:flex;gap:10px"><div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:12px 18px;text-align:center"><div style="color:white;font-size:18px;font-weight:900">34</div><div style="color:rgba(255,255,255,0.65);font-size:10px">Students</div></div><div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:12px 18px;text-align:center"><div style="color:white;font-size:18px;font-weight:900">6</div><div style="color:rgba(255,255,255,0.65);font-size:10px">Handouts</div></div><div style="background:rgba(255,255,255,0.15);border-radius:10px;padding:12px 18px;text-align:center"><div style="color:#90CAF9;font-size:18px;font-weight:900">4.8★</div><div style="color:rgba(255,255,255,0.65);font-size:10px">Rating</div></div></div></div>
+            <div style="background:rgba(255,255,255,0.15);border-radius:14px;padding:18px 20px;min-width:220px"><div style="color:white;font-size:11px;font-weight:700;margin-bottom:10px">👨‍🏫 Assigned Tutor</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:20px">👨‍🏫</div><div><div style="color:white;font-size:13px;font-weight:800">Prof. Williams</div><div style="color:rgba(255,255,255,0.6);font-size:11px">Chemistry Dept.</div></div></div></div>
+          </div>
+          <div class="wsec"><div style="display:grid;grid-template-columns:2fr 1fr;gap:20px"><div><div class="wst" style="margin-bottom:12px">Course Description</div><p style="font-size:13px;color:#555;line-height:1.7">Introduction to forensic chemistry and analytical methods used in forensic science. Students will learn chromatographic techniques, toxicological analysis, and evidence processing procedures.</p><div style="margin-top:16px"><button class="tbtn primary" style="font-size:13px;padding:11px 24px">📤 Submit an Assignment</button></div></div><div style="background:#f8f9ff;border-radius:12px;padding:16px;border:1.5px solid var(--border)"><div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:10px">Available Services</div><div style="padding:10px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:700;color:var(--text)">⭐ Premium</span><span style="font-size:13px;font-weight:900;color:var(--blue)">$250</span></div><div style="padding:10px 0;display:flex;justify-content:space-between"><span style="font-size:12px;font-weight:700;color:var(--text)">Standard</span><span style="font-size:13px;font-weight:900;color:var(--blue)">$50</span></div></div></div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Student Dashboard -->
+  <div class="sg" id="w-dashboard">
+    <div class="sg-title">Student Space — US9 · US10</div>
+    <div class="frames-row"><div class="frame-wrap">
+      <div class="frame-label">Dashboard + assignment history</div><div class="us-tag">US9 · US10</div>
+      <div class="browser"><div class="browser-bar"><div class="bdots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="burl">coursecorrect.nyu.edu/dashboard</div></div>
+        <div class="web-body">
+          <div class="wnav"><div class="wlogo">📖 <em>Course</em><b>Correct</b></div><div class="wlinks"><span class="wlink">Courses</span><span class="wlink on">My Space</span></div><div class="user-chip"><div class="av">👤</div><div class="un">Tariq S.</div></div></div>
+          <div class="dash-hero"><div class="dhav">👤</div><div class="dhi"><h2>Tariq St. Patrick</h2><p>Student · Stansfield University</p></div><div class="dhkpis"><div class="dhkpi"><div class="dk">7</div><div class="dl">Assignments</div></div><div class="dhkpi"><div class="dk">5</div><div class="dl">Graded</div></div><div class="dhkpi"><div class="dk" style="color:#90CAF9">14.2</div><div class="dl">Avg./20</div></div></div></div>
+          <div class="wsec"><div class="wsh"><div class="wst">Assignment History</div><button class="tbtn primary">+ Submit Assignment</button></div>
+          <table class="wtable"><thead><tr><th>Course</th><th>Submitted</th><th>Service</th><th>Grade</th><th>Status</th><th></th></tr></thead><tbody>
+            <tr><td>🧪 CHEM 421: Forensic Chemistry</td><td>01/12/2025</td><td>⭐ Premium</td><td style="font-weight:800;color:var(--green)">17/20</td><td><span class="tstatus graded">✓ Graded</span></td><td><button class="tbtn">View</button></td></tr>
+            <tr><td>📚 ENG 301: American Literature</td><td>01/15/2025</td><td>Standard</td><td>—</td><td><span class="tstatus inprog">⟳ In Progress</span></td><td><button class="tbtn">View</button></td></tr>
+            <tr><td>🏛️ ECON 201: Microeconomics</td><td>01/08/2025</td><td>Standard</td><td style="font-weight:800;color:var(--orange)">12/20</td><td><span class="tstatus graded">✓ Graded</span></td><td><button class="tbtn">View</button></td></tr>
+            <tr><td>🌍 HIST 201: World History</td><td>01/03/2025</td><td>⭐ Premium</td><td>—</td><td><span class="tstatus submitted">↑ Submitted</span></td><td><button class="tbtn">Edit</button></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Submit Assignment -->
+  <div class="sg" id="w-deposit">
+    <div class="sg-title">Submit Assignment — US4 · US5 · US6</div>
+    <div class="frames-row"><div class="frame-wrap">
+      <div class="frame-label">Upload form + service selection + recap</div><div class="us-tag">US4 · US5 · US6</div>
+      <div class="browser"><div class="browser-bar"><div class="bdots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="burl">coursecorrect.nyu.edu/submit</div></div>
+        <div class="web-body">
+          <div class="wnav"><div class="wlogo">📖 <em>Course</em><b>Correct</b></div><div class="wlinks"><span class="wlink on">Submit</span></div><div class="user-chip"><div class="av">👤</div><div class="un">Tariq S.</div></div></div>
+          <div class="wsec"><div class="wst" style="margin-bottom:20px">Submit Assignment</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="background:#f8f9ff;border-radius:12px;padding:16px;border:1.5px solid var(--border)"><div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:10px">1. Select Course</div><select style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-family:'Nunito',sans-serif;font-size:12px;outline:none"><option>CHEM 421: Forensic Chemistry</option><option>ENG 301: American Literature</option></select></div>
+                <div style="background:#f8f9ff;border-radius:12px;padding:16px;border:1.5px solid var(--border)"><div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:10px">2. Upload File</div><div style="border:2px dashed var(--blue);border-radius:10px;padding:24px;text-align:center;cursor:pointer;background:white"><div style="font-size:28px;margin-bottom:6px">📎</div><div style="font-size:12px;font-weight:700;color:var(--text)">Drop file here or click to browse</div><div style="font-size:11px;color:var(--muted);margin-top:4px">PDF, DOC, DOCX · Max 20MB</div></div></div>
+                <div style="background:#f8f9ff;border-radius:12px;padding:16px;border:1.5px solid var(--border)"><div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:10px">3. Choose Service</div><div style="display:flex;flex-direction:column;gap:8px"><label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1.5px solid var(--blue);background:var(--blue-light);cursor:pointer"><input type="radio" name="svc" checked style="accent-color:var(--blue)"><div style="flex:1"><div style="font-size:12px;font-weight:800;color:var(--text)">⭐ Premium</div><div style="font-size:11px;color:var(--muted)">24h · Detailed feedback</div></div><div style="font-size:14px;font-weight:900;color:var(--blue)">$250</div></label><label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1.5px solid var(--border);background:white;cursor:pointer"><input type="radio" name="svc" style="accent-color:var(--blue)"><div style="flex:1"><div style="font-size:12px;font-weight:800;color:var(--text)">Standard</div><div style="font-size:11px;color:var(--muted)">72h · Grade + comments</div></div><div style="font-size:14px;font-weight:900;color:var(--blue)">$50</div></label></div></div>
+                <div style="background:#e8f5e9;border-radius:10px;padding:12px;font-size:12px;color:var(--green);font-weight:600;display:flex;gap:8px"><span>ℹ️</span> You can edit or delete your submission as long as correction hasn't started.</div>
+              </div>
+              <div>
+                <div style="background:white;border-radius:12px;border:1.5px solid var(--border);overflow:hidden"><div style="background:var(--blue);padding:14px 18px"><div style="color:white;font-size:13px;font-weight:800;margin-bottom:2px">Order Summary</div><div style="color:rgba(255,255,255,0.7);font-size:11px">1 assignment · CHEM 421</div></div><div style="padding:16px"><div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--muted)">Course</span><span style="font-weight:700;color:var(--text)">CHEM 421</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--muted)">Service</span><span style="font-weight:700;color:var(--text)">⭐ Premium</span></div><div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px"><span style="color:var(--muted)">Turnaround</span><span style="font-weight:700;color:var(--text)">24 hours</span></div><div style="display:flex;justify-content:space-between;padding:12px 0;font-size:16px;font-weight:900"><span style="color:var(--text)">Total</span><span style="color:var(--blue)">$250.00</span></div><button style="width:100%;background:var(--green);color:white;border:none;border-radius:10px;padding:13px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer">✅ Confirm & Pay</button><div style="font-size:10px;color:var(--muted);text-align:center;margin-top:8px">🔒 Secure payment · Cancel before correction starts</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Admin -->
+  <div class="sg" id="w-admin">
+    <div class="sg-title">Admin Space — US11 · US12 · US13</div>
+    <div class="frames-row"><div class="frame-wrap">
+      <div class="frame-label">Dashboard · Courses · Tutors · Planning</div><div class="us-tag">US11 · US12 · US13</div>
+      <div class="browser"><div class="browser-bar"><div class="bdots"><span class="r"></span><span class="y"></span><span class="g"></span></div><div class="burl">coursecorrect.nyu.edu/admin</div></div>
+        <div class="admin-wrap">
+          <div class="asidebar"><div class="aslogo"><p>📖 CourseCorrect</p><small>NYU Administration</small></div><div class="amenu"><div class="ami on"><span class="ai">📊</span> Dashboard</div><div class="ami"><span class="ai">🎓</span> Courses</div><div class="ami"><span class="ai">📋</span> Subjects</div><div class="ami"><span class="ai">👥</span> Students</div><div class="ami"><span class="ai">👨‍🏫</span> Tutors</div><div class="ami"><span class="ai">⚙️</span> Services</div><div class="ami"><span class="ai">📅</span> Schedule</div></div></div>
+          <div class="amain"><div class="atopbar"><h2>Dashboard</h2><button class="tbtn primary" style="margin-left:auto">+ New Course</button></div><div class="akpis"><div class="akpi"><div class="an">1,240</div><div class="al">Students</div><div class="at up">↑ +12 this month</div></div><div class="akpi"><div class="an">86</div><div class="al">Active Tutors</div><div class="at up">↑ +3 this month</div></div><div class="akpi"><div class="an">47</div><div class="al">Pending Assignments</div><div class="at warn">⚠ To process</div></div><div class="akpi"><div class="an">18</div><div class="al">Active Courses</div><div class="at up">↑ 3 upcoming</div></div></div><div class="acontent"><div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:12px">Recent Courses</div><table class="wtable"><thead><tr><th>Course</th><th>Tutor</th><th>Students</th><th>Status</th><th>Actions</th></tr></thead><tbody><tr><td>🧪 CHEM 421: Forensic Chemistry</td><td>Prof. Williams</td><td>34</td><td><span class="tstatus graded">● Active</span></td><td style="display:flex;gap:6px;padding:12px 0"><button class="tbtn">Edit</button><button class="tbtn" style="color:var(--sub)">Tutors</button></td></tr><tr><td>📚 ENG 301: American Literature</td><td>Dr. Morrison</td><td>28</td><td><span class="tstatus graded">● Active</span></td><td style="display:flex;gap:6px;padding:12px 0"><button class="tbtn">Edit</button><button class="tbtn" style="color:var(--sub)">Tutors</button></td></tr><tr><td>🏛️ ECON 201: Microeconomics</td><td>Unassigned</td><td>—</td><td><span class="tstatus inprog">◎ Upcoming</span></td><td style="display:flex;gap:6px;padding:12px 0"><button class="tbtn">Edit</button><button class="tbtn primary">+ Assign Tutor</button></td></tr></tbody></table></div></div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     DESKTOP APPLICATION
+══════════════════════════════════════════════ -->
+<div class="panel" id="p-desktop">
+  <div class="screen-nav">
+    <button class="sb on" onclick="dscreen('list',this)">📋 Assignment List</button>
+    <button class="sb" onclick="dscreen('correction',this)">✏️ Grade Assignment</button>
+  </div>
+
+  <!-- Assignment list -->
+  <div class="sg on" id="d-list">
+    <div class="sg-title">Assignments to Grade — Desktop US1 · US2</div>
+    <div class="frames-row"><div class="frame-wrap">
+      <div class="frame-label">Tutor sees all pending assignments</div><div class="us-tag">Desktop US1</div>
+      <div class="winframe"><div class="titlebar"><div class="tbdots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="tbtitle">CourseCorrect Tutor — v1.0.0</span></div>
+        <div class="win-body">
+          <div class="dtsidebar"><div class="dtsh"><div class="tav">👨‍🏫</div><div class="tn">Prof. Williams</div><div class="tr">Tutor · Chemistry</div></div><div class="dtnav"><div class="dtns">Main</div><div class="dtni on"><span class="dtic">📋</span> My Assignments <span class="dtnb">12</span></div><div class="dtni"><span class="dtic">✅</span> Graded</div><div class="dtni"><span class="dtic">📅</span> Schedule</div><div class="dtns">Account</div><div class="dtni"><span class="dtic">👤</span> My Profile</div><div class="dtni"><span class="dtic">⚙️</span> Settings</div><div class="dtni"><span class="dtic">🚪</span> Log Out</div></div></div>
+          <div class="dtmain"><div class="dttoolbar"><h2>Assignments to Grade</h2><input class="dtsearch" placeholder="🔍  Search..."><button class="dtfilter on">Urgent</button><button class="dtfilter">All</button><button class="dtfilter">Graded</button></div>
+            <div class="dtcontent"><div class="dtlist">
+              <div class="dtcard urgent"><div class="dtic">🧪</div><div class="dti"><div class="dtn">CHEM 421 – Forensic Chemistry · Assignment 3</div><div class="dts">👤 Tariq St. Patrick · Submitted 01/12/2025</div><div class="dtm"><span class="dtag mat">Chemistry</span><span class="dtag type">⭐ Premium</span><span class="dtag urg">🔴 Urgent</span></div></div><div class="dtd">Deadline<div class="ddl">Today</div></div></div>
+              <div class="dtcard urgent"><div class="dtic">🧪</div><div class="dti"><div class="dtn">CHEM 182 – Organic Structure · Assignment 2</div><div class="dts">👤 Brayden McLaughlin · Submitted 01/11/2025</div><div class="dtm"><span class="dtag mat">Chemistry</span><span class="dtag type">⭐ Premium</span><span class="dtag urg">🔴 Urgent</span></div></div><div class="dtd">Deadline<div class="ddl">Tomorrow</div></div></div>
+              <div class="dtcard"><div class="dtic">🧪</div><div class="dti"><div class="dtn">CHEM 212 – Reactions · Assignment 1</div><div class="dts">👤 Diana Tejada · Submitted 01/10/2025</div><div class="dtm"><span class="dtag mat">Chemistry</span><span class="dtag type">Standard</span></div></div><div class="dtd">Deadline<div style="font-size:10px;color:var(--muted)">01/15/2025</div></div></div>
+              <div class="dtcard"><div class="dtic">🧪</div><div class="dti"><div class="dtn">CHEM 332 – Environmental Chemistry · Assignment 1</div><div class="dts">👤 Monet Stewart · Submitted 01/09/2025</div><div class="dtm"><span class="dtag mat">Chemistry</span><span class="dtag type">Standard</span></div></div><div class="dtd">Deadline<div style="font-size:10px;color:var(--muted)">01/17/2025</div></div></div>
+              <div class="dtcard"><div class="dtic">🧪</div><div class="dti"><div class="dtn">CHEM 305 – Biochemistry · Assignment 2</div><div class="dts">👤 Cane Tejada · Submitted 01/08/2025</div><div class="dtm"><span class="dtag mat">Chemistry</span><span class="dtag type">Standard</span></div></div><div class="dtd">Deadline<div style="font-size:10px;color:var(--muted)">01/18/2025</div></div></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- Grade Assignment -->
+  <div class="sg" id="d-correction">
+    <div class="sg-title">Grade Assignment — Desktop US2 · US3</div>
+    <div class="frames-row"><div class="frame-wrap">
+      <div class="frame-label">Read document · Write correction · Close</div><div class="us-tag">Desktop US2 · US3</div>
+      <div class="winframe"><div class="titlebar"><div class="tbdots"><span class="r"></span><span class="y"></span><span class="g"></span></div><span class="tbtitle">CourseCorrect Tutor — CHEM 421 · Tariq St. Patrick</span></div>
+        <div class="win-body">
+          <div class="dtsidebar"><div class="dtsh"><div class="tav">👨‍🏫</div><div class="tn">Prof. Williams</div><div class="tr">Tutor · Chemistry</div></div><div class="dtnav"><div class="dtns">Main</div><div class="dtni on"><span class="dtic">📋</span> My Assignments <span class="dtnb">12</span></div><div class="dtni"><span class="dtic">✅</span> Graded</div><div class="dtni"><span class="dtic">📅</span> Schedule</div></div></div>
+          <div class="dtmain" style="overflow:hidden"><div class="dttoolbar"><span style="color:var(--sub);font-size:13px;cursor:pointer">‹ Back</span><h2 style="margin-left:10px">Grade: CHEM 421 · Tariq St. Patrick</h2><div style="margin-left:auto;display:flex;gap:8px"><button class="save-btn" style="width:auto;padding:7px 16px;font-size:12px">Save Draft</button></div></div>
+            <div class="split">
+              <div class="docpanel"><div class="dochead"><h3>CHEM 421: Forensic Chemistry – Assignment 3</h3><div class="dm">Tariq St. Patrick · Submitted 01/12/2025 · ⭐ Premium</div></div><div class="docprev"><h4>Toxicological Analysis</h4><p>Gas chromatography is an analytical technique allowing the separation and identification of volatile compounds in a biological sample.</p><br><p>In this study, we analyzed <span class="hl">three blood samples</span> collected from subjects exposed to an unknown toxic agent.</p><br><p><strong>Method used:</strong> GC-MS (gas chromatography–mass spectrometry)</p><br><p>Results indicate the presence of aliphatic alcohols at abnormal concentrations (0.8 g/L), suggesting acute ethyl intoxication associated with the presence of metabolites suggesting secondary exposure to organophosphate compounds...</p><br><p><strong>Conclusion:</strong> Based on the chromatographic profiles obtained, we can conclude that the primary toxicological agent is ethanol combined with trace amounts of acetaldehyde metabolites.</p></div></div>
+              <div class="corrpanel">
+                <div class="csection"><div class="csh">🎯 Grade</div><div class="csb"><div class="note-row"><input class="note-inp" value="17" type="number" min="0" max="20"><span class="note-max">/ 20</span><span class="note-grade">Excellent</span></div></div></div>
+                <div class="csection"><div class="csh">💬 Overall Comment</div><div class="csb"><textarea class="txtarea">Excellent analytical work. The GC-MS methodology is well mastered and the presentation of results is clear and well structured. A few points to improve regarding metabolite interpretation and bibliography.</textarea><div class="qchips"><span class="qc">+ Strong structure</span><span class="qc">+ Clear methodology</span><span class="qc">⚠ Missing references</span><span class="qc">⚠ Develop conclusion</span></div></div></div>
+                <div class="csection"><div class="csh">📌 Key Points</div><div class="csb" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green)"><span>✓</span> Compound identification correct</div><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green)"><span>✓</span> Rigorous experimental protocol</div><div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--red)"><span>✗</span> Incomplete bibliography</div></div></div>
+                <button class="close-btn">✅ Close Correction</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MOBILE APPLICATION
+══════════════════════════════════════════════ -->
+<div class="panel" id="p-mobile">
+  <div class="screen-nav">
+    <button class="sb on" onclick="mscreen('auth',this)">🔐 Auth</button>
+    <button class="sb" onclick="mscreen('browse',this)">📚 Browse</button>
+    <button class="sb" onclick="mscreen('deposit',this)">📤 Submit</button>
+    <button class="sb" onclick="mscreen('dashboard',this)">📊 Dashboard <span class="nb">US9</span></button>
+    <button class="sb" onclick="mscreen('corrections',this)">✅ Corrections</button>
+  </div>
+
+  <!-- Auth -->
+  <div class="sg on" id="m-auth">
+    <div class="sg-title">Authentication — US7 · US8</div>
+    <div class="frames-row">
+
+      <!-- Splash -->
+      <div class="frame-wrap"><div class="frame-label">Welcome screen</div><div class="us-tag">Splash</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="msplash mscroll"><p class="wt">Welcome to</p><div class="lbox"><div class="bi">📖</div><div class="ln"><em>Course</em>Correct</div></div><button class="mbtn">Sign In</button><button class="mbtn ghost">Create Account</button><p class="mtag">Assignment delivery · Expert corrections<br>NYU Platform</p></div>
+        </div></div>
+      </div>
+
+      <!-- Login -->
+      <div class="frame-wrap"><div class="frame-label">Sign in</div><div class="us-tag">Login</div>
+        <div class="phone"><div class="phone-inner" style="background:white"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mlogin-top"><div class="lico">📖</div><h2>Welcome back!</h2><p>Sign in to your NYU account</p></div>
+          <div class="mform"><div><label class="mlabel">University Email</label><input class="minp" value="tariq.patrick@nyu.edu" readonly></div><div><label class="mlabel">Password</label><div class="minp-wrap"><input class="minp" type="password" value="password" readonly><span class="eye">👁</span></div></div><div class="mforgot">Forgot password?</div><button class="mlogin-btn">Sign In</button><div class="mdivider"><span>or</span></div><button class="msso-btn">🎓 Continue with NYU SSO</button><div class="mreg-link">No account yet? <a>Sign Up</a></div></div>
+        </div></div>
+      </div>
+
+      <!-- Register -->
+      <div class="frame-wrap"><div class="frame-label">Create account</div><div class="us-tag">US7</div>
+        <div class="phone"><div class="phone-inner" style="background:#f8f9ff"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mreg-header"><span class="rback">‹ Back</span><h2>Create Account</h2><p>NYU Student · Step 1 of 2</p></div>
+          <div class="msteps" style="padding:10px 18px 0"><div class="mstep done"></div><div class="mstep cur"></div><div class="mstep"></div></div>
+          <div class="mform"><div class="name-grid"><div><label class="mlabel">First Name</label><input class="minp" value="Tariq" readonly></div><div><label class="mlabel">Last Name</label><input class="minp" value="St. Patrick" readonly></div></div><div><label class="mlabel">University Email</label><input class="minp" value="tariq.patrick@nyu.edu" readonly><div class="email-note">⚠ Must end with @nyu.edu</div></div><div><label class="mlabel">Password</label><div class="minp-wrap"><input class="minp" type="password" value="password" readonly><span class="eye">👁</span></div></div><div><label class="mlabel">Confirm Password</label><input class="minp" type="password" value="password" readonly></div><button class="mlogin-btn">Continue →</button><div class="terms-txt">By creating an account you agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>.</div></div>
+        </div></div>
+      </div>
+
+      <!-- Forgot -->
+      <div class="frame-wrap"><div class="frame-label">Forgot password</div><div class="us-tag">US8</div>
+        <div class="phone"><div class="phone-inner" style="background:white"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mforgot-top"><div class="fico">🔑</div><h2>Forgot Password</h2><p>Enter your NYU email to receive a secure reset link</p></div>
+          <div class="mform"><div class="info-card"><span class="ic">ℹ️</span><p>A secure email will be sent to your @nyu.edu address with a link valid for 30 minutes.</p></div><div><label class="mlabel">University Email</label><input class="minp" value="tariq.patrick@nyu.edu" readonly></div><button class="mlogin-btn">Send Reset Link</button><div class="mreg-link">Remembered? <a>Sign In</a></div><div class="success-card"><div class="sic">✅</div><div class="st">Email sent!</div><div class="ss">Check your @nyu.edu inbox</div></div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Browse -->
+  <div class="sg" id="m-browse">
+    <div class="sg-title">Browse Courses — US2 · US3</div>
+    <div class="frames-row">
+
+      <div class="frame-wrap"><div class="frame-label">Select a subject</div><div class="us-tag">US2</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="msubj-header"><h2>Choose a Subject</h2></div>
+          <div class="mscroll"><div class="msubj-grid"><div class="msubj sel"><div class="si">🧪</div><div class="sn">Chemistry</div></div><div class="msubj"><div class="si">📚</div><div class="sn">English Lit.</div></div><div class="msubj"><div class="si">✈️</div><div class="sn">Math</div></div><div class="msubj"><div class="si">🌍</div><div class="sn">History</div></div><div class="msubj"><div class="si">🏛️</div><div class="sn">Economics</div></div><div class="msubj"><div class="si">🔢</div><div class="sn">Physics</div></div></div></div>
+          <div class="mbotnav"><div class="mbni on">🏠<span>Home</span></div><div class="mbni">📋<span>Assignments</span></div><div class="mbni">👤<span>Profile</span></div><div class="mbni">☰<span>Menu</span></div></div>
+        </div></div>
+      </div>
+
+      <div class="frame-wrap"><div class="frame-label">Course list</div><div class="us-tag">US2</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mtopbar"><span class="mback">‹</span><div class="mlogo">📖</div><span class="mtitle">Chemistry</span></div>
+          <div class="mscroll"><div class="mclist"><div class="mccard"><div class="ccic">🧪</div><div class="cci"><div class="ccn">CHEM 182: Organic Structure and Mechanism</div><div class="ccm"><div class="cm"><div class="dot dot-r"></div> 2</div><div class="cm"><div class="dot dot-b"></div> 13</div></div></div></div><div class="mccard"><div class="ccic">🧪</div><div class="cci"><div class="ccn">CHEM 421: Forensic Chemistry</div><div class="ccm"><div class="cm"><div class="dot dot-r"></div> 10</div><div class="cm"><div class="dot dot-b"></div> 6</div></div></div></div><div class="mccard"><div class="ccic">🧪</div><div class="cci"><div class="ccn">CHEM 212: Reactions and Applications</div><div class="ccm"><div class="cm"><div class="dot dot-r"></div> 5</div><div class="cm"><div class="dot dot-b"></div> 7</div></div></div></div><div class="mccard"><div class="ccic">🧪</div><div class="cci"><div class="ccn">CHEM 332: Environmental Chemistry</div><div class="ccm"><div class="cm"><div class="dot dot-r"></div> 3</div><div class="cm"><div class="dot dot-b"></div> 14</div></div></div></div></div></div>
+          <div class="mbotnav"><div class="mbni on">🏠<span>Home</span></div><div class="mbni">📋<span>Assignments</span></div><div class="mbni">👤<span>Profile</span></div><div class="mbni">☰<span>Menu</span></div></div>
+        </div></div>
+      </div>
+
+      <div class="frame-wrap"><div class="frame-label">Course detail</div><div class="us-tag">US3</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mtopbar"><span class="mback">‹</span><span class="mtitle">Course Detail</span></div>
+          <div class="mscroll"><div style="background:var(--blue);padding:14px;color:white;margin:10px;border-radius:12px"><div style="font-size:9px;font-weight:700;background:rgba(255,255,255,0.2);display:inline-block;padding:2px 8px;border-radius:7px;margin-bottom:6px">● ACTIVE</div><div style="font-size:13px;font-weight:800;margin-bottom:4px">CHEM 421: Forensic Chemistry</div><div style="font-size:10px;opacity:.75;margin-bottom:10px">Jan 2025 – May 2025</div><div style="display:flex;gap:6px"><div style="background:rgba(255,255,255,0.15);border-radius:7px;padding:6px 10px;text-align:center;flex:1"><div style="font-size:13px;font-weight:900">34</div><div style="font-size:9px;opacity:.7">Students</div></div><div style="background:rgba(255,255,255,0.15);border-radius:7px;padding:6px 10px;text-align:center;flex:1"><div style="font-size:13px;font-weight:900">6</div><div style="font-size:9px;opacity:.7">Handouts</div></div><div style="background:rgba(255,255,255,0.15);border-radius:7px;padding:6px 10px;text-align:center;flex:1"><div style="font-size:13px;font-weight:900">4.8★</div><div style="font-size:9px;opacity:.7">Rating</div></div></div></div>
+          <div style="padding:0 10px;display:flex;flex-direction:column;gap:8px"><div style="background:white;border-radius:10px;padding:10px;border:1.5px solid var(--border)"><div style="font-size:10px;font-weight:700;color:var(--sub);margin-bottom:6px">👨‍🏫 TUTOR</div><div style="display:flex;align-items:center;gap:8px"><div style="width:30px;height:30px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:15px">👨‍🏫</div><div><div style="font-size:12px;font-weight:800;color:var(--text)">Prof. Williams</div><div style="font-size:10px;color:var(--muted)">Chemistry Dept.</div></div></div></div><div style="background:white;border-radius:10px;padding:10px;border:1.5px solid var(--border)"><div style="font-size:10px;font-weight:700;color:var(--sub);margin-bottom:5px">📝 DESCRIPTION</div><div style="font-size:11px;color:var(--text);line-height:1.6">Introduction to forensic chemistry and analytical methods for forensic sciences.</div></div><button style="background:var(--blue);color:white;border:none;border-radius:12px;padding:12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;width:100%">📤 Submit an Assignment</button></div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <div class="sg" id="m-deposit">
+    <div class="sg-title">Submit Assignment — US4 · US5 · US6</div>
+    <div class="frames-row">
+
+      <div class="frame-wrap"><div class="frame-label">Single submission</div><div class="us-tag">US4</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mtopbar"><span class="mback">‹</span><span class="mtitle">Submit Assignment</span></div>
+          <div class="mscroll"><div class="mdep"><div class="mdep-hero"><div class="dhtag">Chemistry</div><h3>CHEM 421: Forensic Chemistry</h3><div class="dhbdgs"><span class="dhb">📅 Active</span><span class="dhb">👤 Prof. Williams</span></div></div><div class="upload-area"><div class="uic">📎</div><div class="ut">Drop your file here</div><div class="us">PDF, DOC, DOCX · Max 20MB</div></div><div class="svcbox"><div class="svct">Correction Type</div><div class="svcopt sel"><div><div class="on">⭐ Premium</div><div class="od">Response within 24h</div></div><div class="op">$250</div></div><div class="svcopt"><div><div class="on">Standard</div><div class="od">Response within 72h</div></div><div class="op">$50</div></div></div><button class="msubmit">✅ Confirm Submission</button></div></div>
+        </div></div>
+      </div>
+
+      <div class="frame-wrap"><div class="frame-label">Multiple submissions</div><div class="us-tag">US5</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mtopbar"><span class="mback">‹</span><span class="mtitle">Multi-Submit</span><span class="micon">+</span></div>
+          <div class="mscroll"><div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px"><div style="background:var(--blue-light);border-radius:10px;padding:10px;font-size:11px;color:var(--blue);font-weight:700;display:flex;align-items:center;gap:6px"><span>ℹ️</span> Select multiple courses to submit in one action</div><div class="multi-item"><span class="mic">🧪</span><div class="mii"><div class="min">CHEM 421 – Forensic Chemistry</div><div class="mis">assignment_chem421.pdf · ⭐ Premium</div></div><span class="miv">✓</span></div><div class="multi-item"><span class="mic">📚</span><div class="mii"><div class="min">ENG 301 – American Literature</div><div class="mis">assignment_eng301.pdf · Standard</div></div><span class="miv">✓</span></div><div class="add-more"><div class="amic">➕</div><div class="amt">Add another course</div></div><button style="background:var(--blue);color:white;border:none;border-radius:12px;padding:12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;width:100%">View Summary →</button></div></div>
+        </div></div>
+      </div>
+
+      <div class="frame-wrap"><div class="frame-label">Order recap & payment</div><div class="us-tag">US6</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mtopbar"><span class="mback">‹</span><span class="mtitle">Summary</span></div>
+          <div class="mscroll"><div class="recap"><div style="font-size:11px;font-weight:700;color:var(--sub)">2 assignments to submit</div><div class="recap-item"><div class="ric">🧪</div><div class="rii"><div class="rin">CHEM 421 – Forensic Chemistry</div><div class="ris">⭐ Premium · 24h</div></div><div class="rip">$250</div></div><div class="recap-item"><div class="ric">📚</div><div class="rii"><div class="rin">ENG 301 – American Literature</div><div class="ris">Standard · 72h</div></div><div class="rip">$50</div></div><div class="recap-total"><div class="rtl">Total</div><div class="rtp">$300.00</div></div><div class="pay-row"><div class="prt">💳 Payment</div><div class="pay-card"><span style="font-size:16px">💳</span><div><div class="pct">Visa •••• 4242</div><div class="pcs">Expires 12/26</div></div><span style="margin-left:auto;color:var(--blue);font-weight:700;font-size:10px">Change</span></div></div><button class="confirm-btn">✅ Confirm & Pay $300</button><div class="secure-note">🔒 Secure payment · Cancel before grading starts</div></div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="sg" id="m-dashboard">
+    <div class="sg-title">Student Space — US9 · US10</div>
+    <div class="frames-row">
+
+      <div class="frame-wrap"><div class="frame-label">Student dashboard</div><div class="us-tag">US9 · US10</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mdash-header"><div class="mdu"><div class="mdav">👤</div><div><div class="mdn">Tariq St. Patrick</div><div class="mds">Stansfield · Student</div></div><div class="mnotif" style="margin-left:auto"><span style="color:white;font-size:17px">🔔</span><div class="mnotif-dot"></div></div></div><div class="mkpis"><div class="mkpi"><div class="mkn">7</div><div class="mkl">Assignments</div></div><div class="mkpi"><div class="mkn">5</div><div class="mkl">Graded</div></div><div class="mkpi"><div class="mkn" style="color:#90CAF9">14.2</div><div class="mkl">Avg./20</div></div></div></div>
+          <div class="mtabs"><button class="mtab on">All</button><button class="mtab">In Progress</button><button class="mtab">Graded</button></div>
+          <div class="mscroll"><div class="mdvlist"><div class="mdvcard g"><div class="dvt">CHEM 421 – Forensic Chemistry</div><div class="dvs">01/12/2025 · ⭐ Premium</div><div class="dvr"><span class="mpill pill-g">✓ Graded</span><span style="font-size:13px;font-weight:900;color:var(--green)">17/20</span></div></div><div class="mdvcard o"><div class="dvt">ENG 301 – American Literature</div><div class="dvs">01/15/2025 · Standard</div><div class="dvr"><span class="mpill pill-o">⟳ In Progress</span><span style="font-size:10px;color:var(--muted)">48h left</span></div></div><div class="mdvcard g"><div class="dvt">ECON 201 – Microeconomics</div><div class="dvs">01/08/2025 · Standard</div><div class="dvr"><span class="mpill pill-g">✓ Graded</span><span style="font-size:13px;font-weight:900;color:var(--orange)">12/20</span></div></div><div class="mdvcard"><div class="dvt">HIST 201 – World History</div><div class="dvs">01/03/2025 · ⭐ Premium</div><div class="dvr"><span class="mpill pill-b">↑ Submitted</span><span style="font-size:10px;color:var(--muted)">pending</span></div></div></div></div>
+          <div class="mbotnav"><div class="mbni">🏠<span>Home</span></div><div class="mbni on">📋<span>Assignments</span></div><div class="mbni">👤<span>Profile</span></div><div class="mbni">☰<span>Menu</span></div></div>
+        </div></div>
+      </div>
+
+      <div class="frame-wrap"><div class="frame-label">Student profile</div><div class="us-tag">US9</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mtopbar"><div class="mlogo">📖</div><span class="mtitle">My Profile</span><span class="micon">✏️</span></div>
+          <div class="mscroll"><div class="mprofile-top"><div class="pav">👤</div><div class="pn">Tariq St. Patrick</div><div class="pe">tariq.patrick@nyu.edu</div></div><div style="padding:10px 12px;display:flex;flex-direction:column;gap:8px"><div class="mlist-card"><div class="mlist-row"><span class="mlic">🏫</span><span class="mlt">University</span><span class="mlv">NYU Stansfield</span></div><div class="mlist-row"><span class="mlic">📞</span><span class="mlt">Phone</span><span class="mlv">+1 (917) 555-0142</span></div><div class="mlist-row"><span class="mlic">📅</span><span class="mlt">Member since</span><span class="mlv">Sept. 2024</span></div></div><div class="mlist-card"><div class="mlist-row"><span class="mlic">🔔</span><span class="mlt">Notifications</span><span class="mla">›</span></div><div class="mlist-row"><span class="mlic">💳</span><span class="mlt">Payments</span><span class="mla">›</span></div><div class="mlist-row"><span class="mlic">🔐</span><span class="mlt">Security</span><span class="mla">›</span></div></div><button class="logout-btn">Log Out</button></div></div>
+          <div class="mbotnav"><div class="mbni">🏠<span>Home</span></div><div class="mbni">📋<span>Assignments</span></div><div class="mbni on">👤<span>Profile</span></div><div class="mbni">☰<span>Menu</span></div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Corrections -->
+  <div class="sg" id="m-corrections">
+    <div class="sg-title">Corrections — Mobile US1 · Mobile US2</div>
+    <div class="frames-row">
+
+      <div class="frame-wrap"><div class="frame-label">All assignments with status</div><div class="us-tag">Mobile US1</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mdash-header" style="padding:10px 14px 12px"><div class="mdu" style="margin-bottom:0"><div class="mdav">📋</div><div><div class="mdn">My Assignments</div><div class="mds">7 total · 5 graded</div></div><div class="mnotif" style="margin-left:auto"><span style="color:white;font-size:17px">🔔</span><div class="mnotif-dot"></div></div></div></div>
+          <div class="mtabs"><button class="mtab on">All</button><button class="mtab">Graded</button><button class="mtab">Pending</button><button class="mtab">Submitted</button></div>
+          <div class="mscroll"><div class="mdvlist"><div class="mdvcard g"><div class="dvt">CHEM 421 – Forensic Chemistry</div><div class="dvs">01/12/2025 · ⭐ Premium · Prof. Williams</div><div class="dvr"><span class="mpill pill-g">✓ Graded</span><span style="font-size:13px;font-weight:900;color:var(--green)">17/20</span></div></div><div class="mdvcard o"><div class="dvt">ENG 301 – American Literature</div><div class="dvs">01/15/2025 · Standard · Dr. Morrison</div><div class="dvr"><span class="mpill pill-o">⟳ In Progress</span><span style="font-size:10px;color:var(--muted)">⏱ 48h left</span></div></div><div class="mdvcard g"><div class="dvt">ECON 201 – Microeconomics</div><div class="dvs">01/08/2025 · Standard · Prof. Greene</div><div class="dvr"><span class="mpill pill-g">✓ Graded</span><span style="font-size:13px;font-weight:900;color:var(--orange)">12/20</span></div></div><div class="mdvcard"><div class="dvt">HIST 201 – World History</div><div class="dvs">01/03/2025 · ⭐ Premium</div><div class="dvr"><span class="mpill pill-b">↑ Submitted</span><span style="font-size:10px;color:var(--muted)">pending</span></div></div><div class="mdvcard g"><div class="dvt">MATH 301 – Linear Algebra</div><div class="dvs">12/20/2024 · Standard · Dr. Chen</div><div class="dvr"><span class="mpill pill-g">✓ Graded</span><span style="font-size:13px;font-weight:900;color:var(--green)">16/20</span></div></div></div></div>
+          <div class="mbotnav"><div class="mbni">🏠<span>Home</span></div><div class="mbni on">📋<span>Assignments</span></div><div class="mbni">👤<span>Profile</span></div><div class="mbni">☰<span>Menu</span></div></div>
+        </div></div>
+      </div>
+
+      <div class="frame-wrap"><div class="frame-label">Correction detail · Real-time</div><div class="us-tag">Mobile US2</div>
+        <div class="phone"><div class="phone-inner"><div class="mbar"><span class="mt">9:41</span><span class="mi">▶ ⬤ ⬤</span></div>
+          <div class="mtopbar"><span class="mback">‹</span><span class="mtitle">Correction Received</span></div>
+          <div class="mscroll"><div class="mcorr-hero"><div class="chtag">Chemistry</div><h3>CHEM 421: Forensic Chemistry · Assignment 3</h3><div class="chsr"><div class="chs">17<span style="font-size:13px">/20</span></div><div class="chi">Prof. Williams<br>Graded 01/13/2025</div></div><div class="chgr">🏆 Excellent</div></div>
+          <div style="height:8px"></div>
+          <div class="mcsect"><div class="mcsect-t">Overall Comment</div><div class="mcomment"><div class="mca">👨‍🏫 Prof. Williams · 01/13/2025</div>Excellent analytical work. The GC-MS methodology is well mastered and the results are clearly presented. A few areas to improve regarding metabolite interpretation.</div></div>
+          <div class="mcsect"><div class="mcsect-t">Detailed Feedback</div><div class="mpts"><div class="mpt"><div class="mpd mpd-g"></div>Compound identification correct</div><div class="mpt"><div class="mpd mpd-g"></div>Rigorous experimental protocol</div><div class="mpt"><div class="mpd mpd-r"></div>Incomplete bibliography</div></div></div>
+          <div class="realtime-badge"><div class="rt-dot"></div><div class="rt-text">Live updates enabled</div></div>
+          <button class="mdl-btn">📥 Download Correction PDF</button>
+          <div style="height:12px"></div></div>
+          <div class="mbotnav"><div class="mbni">🏠<span>Home</span></div><div class="mbni on">📋<span>Assignments</span></div><div class="mbni">👤<span>Profile</span></div><div class="mbni">☰<span>Menu</span></div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /mobile panel -->
+
+<script>
+function switchApp(id,btn){
+  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('p-'+id).classList.add('on');
+}
+function wscreen(id,btn){
+  document.querySelectorAll('#p-web .sb').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('#p-web .sg').forEach(s=>s.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('w-'+id).classList.add('on');
+}
+function dscreen(id,btn){
+  document.querySelectorAll('#p-desktop .sb').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('#p-desktop .sg').forEach(s=>s.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('d-'+id).classList.add('on');
+}
+function mscreen(id,btn){
+  document.querySelectorAll('#p-mobile .sb').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('#p-mobile .sg').forEach(s=>s.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('m-'+id).classList.add('on');
+}
+</script>
+</body>
+</html>
