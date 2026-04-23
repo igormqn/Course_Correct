@@ -66,7 +66,7 @@ class TutorAssignmentSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     """Serializer pour les cours"""
     subject = SubjectSerializer(read_only=True)
-    tutor_assignments = TutorAssignmentSerializer(source='tutor_assignments', many=True, read_only=True)
+    tutor_assignments = TutorAssignmentSerializer(many=True, read_only=True)
     
     class Meta:
         model = Course
