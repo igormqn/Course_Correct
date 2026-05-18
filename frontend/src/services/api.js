@@ -4,6 +4,9 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8000/api';
 
+// DRF retourne {count, results:[]} quand la pagination est active — on normalise en tableau
+const list = (data) => Array.isArray(data) ? data : (data?.results ?? []);
+
 // Créer l'instance axios
 const api = axios.create({
   baseURL: API_URL,
@@ -87,7 +90,7 @@ export const authAPI = {
 export const serviceAPI = {
   getAll: async () => {
     const response = await api.get('/services/');
-    return response.data;
+    return list(response.data);
   },
 
   getById: async (id) => {
@@ -102,7 +105,7 @@ export const serviceAPI = {
 export const courseAPI = {
   getAll: async () => {
     const response = await api.get('/courses/');
-    return response.data;
+    return list(response.data);
   },
 
   getById: async (id) => {
@@ -114,7 +117,7 @@ export const courseAPI = {
 export const subjectAPI = {
   getAll: async () => {
     const response = await api.get('/subjects/');
-    return response.data;
+    return list(response.data);
   },
 };
 
@@ -124,7 +127,7 @@ export const subjectAPI = {
 export const assignmentAPI = {
   getAll: async () => {
     const response = await api.get('/assignments/');
-    return response.data;
+    return list(response.data);
   },
 
   getById: async (id) => {
@@ -134,12 +137,12 @@ export const assignmentAPI = {
 
   getMyAssignments: async () => {
     const response = await api.get('/assignments/my_assignments/');
-    return response.data;
+    return list(response.data);
   },
 
   getToCorrect: async () => {
     const response = await api.get('/assignments/to_correct/');
-    return response.data;
+    return list(response.data);
   },
 
   create: async (data) => {
@@ -173,7 +176,7 @@ export const assignmentAPI = {
 export const correctionAPI = {
   getAll: async () => {
     const response = await api.get('/corrections/');
-    return response.data;
+    return list(response.data);
   },
 
   getById: async (id) => {

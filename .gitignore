@@ -8,3 +8,19 @@ __pycache__/
 *.pyc
 .pytest_cache/
 htmlcov/
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+
+# Mobile (Flutter)
+mobile/.dart_tool/
+mobile/build/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.packages
+
+# Desktop
+desktop/__pycache__/
+desktop/core/__pycache__/
+desktop/screens/__pycache__/

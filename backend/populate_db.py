@@ -32,7 +32,7 @@ def create_users():
     admin, created = User.objects.get_or_create(
         username='admin',
         defaults={
-            'email': 'admin@stansfield.edu',
+            'email': 'admin@nyu.edu',
             'first_name': 'Admin',
             'last_name': 'System',
             'role': 'ADMIN',
@@ -51,7 +51,7 @@ def create_users():
     student, created = User.objects.get_or_create(
         username='alex.morgan',
         defaults={
-            'email': 'alex.morgan@stansfield.edu',
+            'email': 'alex.morgan@nyu.edu',
             'first_name': 'Alex',
             'last_name': 'Morgan',
             'role': 'STUDENT',
@@ -69,7 +69,7 @@ def create_users():
     tutors_data = [
         {
             'username': 'james.williams',
-            'email': 'james.williams@stansfield.edu',
+            'email': 'james.williams@nyu.edu',
             'first_name': 'James',
             'last_name': 'Williams',
             'phone': '+1 (917) 555-0201',
@@ -77,7 +77,7 @@ def create_users():
         },
         {
             'username': 'sarah.morrison',
-            'email': 'sarah.morrison@stansfield.edu',
+            'email': 'sarah.morrison@nyu.edu',
             'first_name': 'Sarah',
             'last_name': 'Morrison',
             'phone': '+1 (917) 555-0202',
@@ -85,7 +85,7 @@ def create_users():
         },
         {
             'username': 'michael.greene',
-            'email': 'michael.greene@stansfield.edu',
+            'email': 'michael.greene@nyu.edu',
             'first_name': 'Michael',
             'last_name': 'Greene',
             'phone': '+1 (917) 555-0203',
@@ -93,7 +93,7 @@ def create_users():
         },
         {
             'username': 'li.chen',
-            'email': 'li.chen@stansfield.edu',
+            'email': 'li.chen@nyu.edu',
             'first_name': 'Li',
             'last_name': 'Chen',
             'phone': '+1 (917) 555-0204',
@@ -130,7 +130,7 @@ def create_services():
         {
             'name': 'Standard',
             'description': 'Correction standard avec feedback détaillé (7 jours)',
-            'price': Decimal('0.00'),
+            'price': Decimal('29.90'),
             'correction_type': 'standard',  # minuscule comme dans le modèle
             'turnaround_hours': 168,  # 7 jours = 168 heures
             'is_active': True
@@ -138,7 +138,7 @@ def create_services():
         {
             'name': 'Premium',
             'description': 'Correction prioritaire avec feedback approfondi et recommandations personnalisées (48 heures)',
-            'price': Decimal('29.99'),
+            'price': Decimal('59.90'),
             'correction_type': 'premium',  # minuscule comme dans le modèle
             'turnaround_hours': 48,  # 2 jours = 48 heures
             'is_active': True
@@ -167,19 +167,22 @@ def create_subjects_and_courses():
     print("\n📚 Création des matières et cours...")
     
     subjects_data = [
-        {'name': 'Chemistry', 'icon': '🧪'},
-        {'name': 'English Literature', 'icon': '📚'},
-        {'name': 'Economics', 'icon': '📊'},
-        {'name': 'History', 'icon': '🏛️'},
-        {'name': 'Mathematics', 'icon': '🔢'},
+        {'code': 'CHEM 421', 'name': 'Chemistry', 'icon': '🧪'},
+        {'code': 'ENG 301',  'name': 'English Literature', 'icon': '📚'},
+        {'code': 'ECON 201', 'name': 'Economics', 'icon': '📊'},
+        {'code': 'HIST 201', 'name': 'History', 'icon': '🏛️'},
+        {'code': 'MATH 301', 'name': 'Mathematics', 'icon': '🔢'},
     ]
-    
+
     created_subjects = []
     for subject_data in subjects_data:
         subject, created = Subject.objects.get_or_create(
             name=subject_data['name'],
-            defaults={'icon': subject_data['icon']}
+            defaults={'code': subject_data['code'], 'icon': subject_data['icon']}
         )
+        if not created and not subject.code:
+            subject.code = subject_data['code']
+            subject.save()
         if created:
             print(f"   ✅ Matière {subject.name} créée")
         else:
@@ -194,11 +197,15 @@ def create_subjects_and_courses():
             subject=subject,
             defaults={
                 'description': f"Course in {subject.name}",
+                'semester': 'Spring 2025',
                 'start_date': datetime(2025, 1, 15).date(),
                 'end_date': datetime(2025, 5, 15).date(),
                 'status': 'active'
             }
         )
+        if not created and not course.semester:
+            course.semester = 'Spring 2025'
+            course.save()
         if created:
             print(f"   ✅ Cours {course.name} créé")
         else:
@@ -242,38 +249,33 @@ def create_assignments(student, courses, services):
     
     assignments_data = [
         {
-            'course': courses[0],  # CHEM 421
+            'course': courses[0],  # CHEM 421 - PENDING for james.williams to correct
             'service': premium_service,
-            'status': 'CORRECTED',
-            'submitted_at': datetime.now() - timedelta(days=15),
+            'status': 'PENDING',
             'file': 'assignments/chem421_assignment3.pdf'
         },
         {
-            'course': courses[1],  # ENG 301
+            'course': courses[1],  # ENG 301 - IN_PROGRESS (sarah.morrison correcting)
             'service': standard_service,
             'status': 'IN_PROGRESS',
-            'submitted_at': datetime.now() - timedelta(days=2),
             'file': 'assignments/eng301_essay.pdf'
         },
         {
-            'course': courses[2],  # ECON 201
+            'course': courses[2],  # ECON 201 - CORRECTED
             'service': standard_service,
             'status': 'CORRECTED',
-            'submitted_at': datetime.now() - timedelta(days=25),
             'file': 'assignments/econ201_analysis.pdf'
         },
         {
-            'course': courses[3],  # HIST 201
+            'course': courses[3],  # HIST 201 - PENDING (sarah.morrison)
             'service': premium_service,
             'status': 'PENDING',
-            'submitted_at': datetime.now() - timedelta(days=30),
             'file': 'assignments/hist201_research.pdf'
         },
         {
-            'course': courses[4],  # MATH 301
+            'course': courses[4],  # MATH 301 - CORRECTED
             'service': standard_service,
             'status': 'CORRECTED',
-            'submitted_at': datetime.now() - timedelta(days=40),
             'file': 'assignments/math301_homework.pdf'
         },
     ]
@@ -283,7 +285,6 @@ def create_assignments(student, courses, services):
         assignment, created = Assignment.objects.get_or_create(
             student=student,
             course=assignment_data['course'],
-            submitted_at=assignment_data['submitted_at'],
             defaults={
                 'service': assignment_data['service'],
                 'status': assignment_data['status'],
@@ -305,31 +306,20 @@ def create_corrections(assignments, tutors):
     
     corrections_data = [
         {
-            'assignment': assignments[0],  # CHEM 421
-            'tutor': tutors[0],  # Williams
-            'comment': "Excellent analytical work. The GC-MS methodology is well mastered and the results are clearly presented. A few areas to improve regarding metabolite interpretation.",
-            'grade': 17.0,
-            'status': 'COMPLETED',
-            'corrected_at': datetime.now() - timedelta(days=13),
-            'closed_at': datetime.now() - timedelta(days=13)
-        },
-        {
             'assignment': assignments[2],  # ECON 201
             'tutor': tutors[2],  # Greene
-            'comment': "Good understanding of microeconomic concepts. However, the supply-demand analysis could be more detailed. The graphs are clear but lack proper citations.",
+            'comments': "Good understanding of microeconomic concepts. However, the supply-demand analysis could be more detailed. The graphs are clear but lack proper citations.",
+            'suggestions': "Add proper citations and expand the supply-demand analysis with real-world examples.",
             'grade': 12.0,
             'status': 'COMPLETED',
-            'corrected_at': datetime.now() - timedelta(days=20),
-            'closed_at': datetime.now() - timedelta(days=20)
         },
         {
             'assignment': assignments[4],  # MATH 301
             'tutor': tutors[3],  # Chen
-            'comment': "Very rigorous mathematical approach. Matrix operations are correctly executed. Minor calculation error in problem 5.",
+            'comments': "Very rigorous mathematical approach. Matrix operations are correctly executed. Minor calculation error in problem 5.",
+            'suggestions': "Recheck problem 5 step by step — there is a sign error in the third row operation.",
             'grade': 16.0,
             'status': 'COMPLETED',
-            'corrected_at': datetime.now() - timedelta(days=35),
-            'closed_at': datetime.now() - timedelta(days=35)
         }
     ]
     

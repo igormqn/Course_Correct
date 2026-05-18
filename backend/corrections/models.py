@@ -2,18 +2,19 @@ from django.db import models
 from django.conf import settings
 
 class Correction(models.Model):
-    OPEN   = 'open'
-    CLOSED = 'closed'
+    PENDING   = 'PENDING'
+    COMPLETED = 'COMPLETED'
     STATUS_CHOICES = [
-        (OPEN,   'Open'),
-        (CLOSED, 'Closed'),
+        (PENDING,   'Pending'),
+        (COMPLETED, 'Completed'),
     ]
 
     assignment   = models.OneToOneField('assignments.Assignment', on_delete=models.CASCADE, related_name='correction')
     tutor        = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='corrections')
-    comment      = models.TextField(blank=True)
+    comments     = models.TextField(blank=True)
+    suggestions  = models.TextField(blank=True)
     grade        = models.FloatField(null=True, blank=True)
-    status       = models.CharField(max_length=20, choices=STATUS_CHOICES, default=OPEN)
+    status       = models.CharField(max_length=20, choices=STATUS_CHOICES, default=PENDING)
     corrected_at = models.DateTimeField(auto_now_add=True)
     closed_at    = models.DateTimeField(null=True, blank=True)
 
@@ -22,8 +23,9 @@ class Correction(models.Model):
 
     def close(self):
         from django.utils import timezone
-        self.status    = self.CLOSED
+        from assignments.models import Assignment
+        self.status    = self.COMPLETED
         self.closed_at = timezone.now()
-        self.assignment.status = 'graded'
+        self.assignment.status = Assignment.CORRECTED
         self.assignment.save()
         self.save()

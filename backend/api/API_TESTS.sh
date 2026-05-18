@@ -45,7 +45,7 @@ curl -X POST $BASE_URL/users/ \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john.doe",
-    "email": "john.doe@stansfield.edu",
+    "email": "john.doe@nyu.edu",
     "password": "password123",
     "first_name": "John",
     "last_name": "Doe",

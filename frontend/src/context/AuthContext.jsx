@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import authService from '../services/authService';
+import { authAPI } from '../services/api';
 
 export const AuthContext = createContext();
 
@@ -9,35 +9,68 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const loadUser = async () => {
-      if (authService.isAuthenticated()) {
+      const token = localStorage.getItem('access_token');
+      if (token) {
         try {
-          const userData = await authService.getCurrentUser();
+          const userData = await authAPI.getCurrentUser();
           setUser(userData);
         } catch (err) {
-          console.error('Erreur lors du chargement de l\'utilisateur', err);
-          authService.logout();
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
+          localStorage.removeItem('user');
         }
       }
       setLoading(false);
     };
-
     loadUser();
   }, []);
 
-  const login = async (username, password) => {
-    await authService.login(username, password);
-    const userData = await authService.getCurrentUser();
-    setUser(userData);
-    return userData;
+  const login = async (credentials) => {
+    try {
+      const tokenData = await authAPI.login(credentials);
+      localStorage.setItem('access_token', tokenData.access);
+      localStorage.setItem('refresh_token', tokenData.refresh);
+      const userData = await authAPI.getCurrentUser();
+      localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
+      return { success: true, user: userData };
+    } catch (err) {
+      return {
+        success: false,
+        error: err.response?.data?.detail || 'Invalid username or password',
+      };
+    }
+  };
+
+  const register = async (userData) => {
+    try {
+      await authAPI.register(userData);
+      const result = await login({
+        username: userData.username,
+        password: userData.password,
+      });
+      return result;
+    } catch (err) {
+      const errorData = err.response?.data;
+      let errorMsg = 'Registration failed';
+      if (errorData && typeof errorData === 'object') {
+        const firstKey = Object.keys(errorData)[0];
+        const val = errorData[firstKey];
+        errorMsg = `${firstKey}: ${Array.isArray(val) ? val[0] : val}`;
+      }
+      return { success: false, error: errorMsg };
+    }
   };
 
   const logout = () => {
-    authService.logout();
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user');
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

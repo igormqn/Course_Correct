@@ -2,7 +2,6 @@ from rest_framework import viewsets, status, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
-from django.utils import timezone
 
 from users.models import User
 from services.models import Service
@@ -24,103 +23,76 @@ User = get_user_model()
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet pour gérer les utilisateurs.
-    - list : Liste tous les utilisateurs
-    - create : Créer un nouvel utilisateur
-    - retrieve : Obtenir les détails d'un utilisateur
-    - update : Mettre à jour un utilisateur
-    - destroy : Supprimer un utilisateur
-    """
     queryset = User.objects.all()
-    permission_classes = [permissions.IsAuthenticated]
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]
 
     def get_serializer_class(self):
         if self.action == 'create':
             return UserCreateSerializer
         return UserSerializer
 
-    @action(detail=False, methods=['get'])
-    def me(self, request):
-        """Obtenir les infos de l'utilisateur connecté"""
-        serializer = UserSerializer(request.user)
-        return Response(serializer.data)
-
     def get_queryset(self):
-        # Les utilisateurs ne peuvent voir que leur propre profil, sauf s'ils sont admin
-        if self.request.user.is_staff:
+        if self.request.user.is_staff or self.request.user.role == User.ADMIN:
             return User.objects.all()
         return User.objects.filter(id=self.request.user.id)
 
+    @action(detail=False, methods=['get'])
+    def me(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
 
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    ViewSet pour les services (lecture seule).
-    - list : Liste tous les services
-    - retrieve : Obtenir les détails d'un service
-    """
-    queryset = Service.objects.all()
+    queryset = Service.objects.filter(is_active=True)
     serializer_class = ServiceSerializer
     permission_classes = [permissions.AllowAny]
 
 
 class SubjectViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    ViewSet pour les matières (lecture seule).
-    - list : Liste toutes les matières
-    - retrieve : Obtenir les détails d'une matière
-    """
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
     permission_classes = [permissions.AllowAny]
 
 
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    ViewSet pour les cours (lecture seule).
-    - list : Liste tous les cours
-    - retrieve : Obtenir les détails d'un cours
-    """
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
     permission_classes = [permissions.AllowAny]
 
 
 class AssignmentViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet pour gérer les devoirs.
-    - list : Liste les devoirs (selon le rôle)
-    - create : Créer un devoir
-    - retrieve : Obtenir les détails d'un devoir
-    - update : Mettre à jour un devoir
-    - destroy : Supprimer un devoir
-    - my_assignments : Mes devoirs (pour les étudiants)
-    - to_correct : Devoirs à corriger (pour les tuteurs)
-    - update_status : Changer le statut d'un devoir
-    """
-    queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        if user.role == 'student':
+        if user.role == User.STUDENT:
             return Assignment.objects.filter(student=user)
-        elif user.role == 'tutor':
-            return Assignment.objects.filter(course__tutor_assignments__tutor=user)
-        else:  # admin
-            return Assignment.objects.all()
+        elif user.role == User.TUTOR:
+            return Assignment.objects.filter(
+                course__tutor_assignments__tutor=user
+            )
+        return Assignment.objects.all()
 
     def perform_create(self, serializer):
-        """L'utilisateur connecté devient automatiquement l'étudiant"""
-        serializer.save(student=self.request.user)
+        method = self.request.data.get('payment_method')
+        if method == Assignment.STRIPE:
+            pay_status = Assignment.PAID
+        elif method == Assignment.CASH:
+            pay_status = Assignment.PENDING_CASH
+        else:
+            pay_status = Assignment.UNPAID
+        serializer.save(student=self.request.user, payment_status=pay_status)
 
     @action(detail=False, methods=['get'])
     def my_assignments(self, request):
-        """Obtenir les devoirs de l'étudiant connecté"""
-        if request.user.role != 'student':
+        if request.user.role != User.STUDENT:
             return Response(
-                {'error': 'Seuls les étudiants peuvent accéder à leurs devoirs'},
+                {'error': 'Only students can access this endpoint'},
                 status=status.HTTP_403_FORBIDDEN
             )
         assignments = Assignment.objects.filter(student=request.user)
@@ -129,32 +101,28 @@ class AssignmentViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def to_correct(self, request):
-        """Obtenir les devoirs à corriger (tuteur)"""
-        if request.user.role != 'tutor':
+        if request.user.role != User.TUTOR:
             return Response(
-                {'error': 'Seuls les tuteurs peuvent corriger les devoirs'},
+                {'error': 'Only tutors can access this endpoint'},
                 status=status.HTTP_403_FORBIDDEN
             )
-        # Les devoirs assignés au tuteur via les cours
         assignments = Assignment.objects.filter(
             course__tutor_assignments__tutor=request.user,
-            status=Assignment.SUBMITTED
+            status__in=[Assignment.PENDING, Assignment.IN_PROGRESS]
         )
         serializer = self.get_serializer(assignments, many=True)
         return Response(serializer.data)
 
     @action(detail=True, methods=['patch'])
     def update_status(self, request, pk=None):
-        """Changer le statut d'un devoir"""
         assignment = self.get_object()
         new_status = request.data.get('status')
-        
-        if new_status not in dict(Assignment.STATUS_CHOICES):
+        valid = dict(Assignment.STATUS_CHOICES).keys()
+        if new_status not in valid:
             return Response(
-                {'error': 'Statut invalide'},
+                {'error': f'Invalid status. Must be one of: {", ".join(valid)}'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
         assignment.status = new_status
         assignment.save()
         serializer = self.get_serializer(assignment)
@@ -162,36 +130,25 @@ class AssignmentViewSet(viewsets.ModelViewSet):
 
 
 class CorrectionViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet pour gérer les corrections.
-    - list : Liste toutes les corrections
-    - create : Créer une correction
-    - retrieve : Obtenir les détails d'une correction
-    - update : Mettre à jour une correction
-    - destroy : Supprimer une correction
-    - complete : Marquer une correction comme terminée
-    """
-    queryset = Correction.objects.all()
     serializer_class = CorrectionSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         user = self.request.user
-        if user.role == 'tutor':
+        if user.role == User.TUTOR:
             return Correction.objects.filter(tutor=user)
-        elif user.role == 'student':
+        elif user.role == User.STUDENT:
             return Correction.objects.filter(assignment__student=user)
-        else:  # admin
-            return Correction.objects.all()
+        return Correction.objects.all()
 
     def perform_create(self, serializer):
-        """Le tuteur connecté devient automatiquement le correcteur"""
         serializer.save(tutor=self.request.user)
 
     @action(detail=True, methods=['patch'])
     def complete(self, request, pk=None):
-        """Marquer une correction comme terminée"""
         correction = self.get_object()
         correction.close()
         serializer = self.get_serializer(correction)
         return Response(serializer.data)
+
+

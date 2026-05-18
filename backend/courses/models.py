@@ -1,6 +1,7 @@
 from django.db import models
 
 class Subject(models.Model):
+    code = models.CharField(max_length=20, blank=True)
     name = models.CharField(max_length=100)
     icon = models.CharField(max_length=10, blank=True)
 
@@ -21,6 +22,7 @@ class Course(models.Model):
     name        = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     subject     = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='courses')
+    semester    = models.CharField(max_length=50, blank=True)
     start_date  = models.DateField()
     end_date    = models.DateField()
     status      = models.CharField(max_length=20, choices=STATUS_CHOICES, default=UPCOMING)
