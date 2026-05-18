@@ -1,9 +1,7 @@
 import sys
 import os
 
-# Remplace TON_USERNAME par ton nom d'utilisateur PythonAnywhere
-username = os.environ.get('USER', 'TON_USERNAME')
-path = f'/home/{username}/Course_Correct/backend'
+path = '/home/Igormqn/Course_Correct/backend'
 
 if path not in sys.path:
     sys.path.insert(0, path)
